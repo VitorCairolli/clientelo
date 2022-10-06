@@ -62,11 +62,30 @@ public class Pedido {
                 '}';
     }
 
-    public static void orderByQuantidade(List<Pedido> list) {
+    public static void orderByQuantity(List<Pedido> list) {
         Comparator<Pedido> comparator = new Comparator<Pedido>() {
             @Override
             public int compare(Pedido o1, Pedido o2) {
                 return o1.getQuantidade() - o2.getQuantidade();
+            }
+        };
+        Collections.sort(list, comparator);
+    }
+
+    public static void orderByCategory(List<Pedido> list) {
+        Comparator<Pedido> comparator = new Comparator<Pedido>() {
+            @Override
+            public int compare(Pedido o1, Pedido o2) {
+                if(o2.getCategoria().length() < o1.getCategoria().length()){
+                    Pedido temp = o1;
+                    o1 = o2;
+                    o2 = temp;
+                }
+                for (int i = 0; i < o1.getCategoria().length(); i++)
+                    if(o1.getCategoria().charAt(i) != o2.getCategoria().charAt(i))
+                        return o1.getCategoria().charAt(i) - o2.getCategoria().charAt(i);
+
+                return 0;
             }
         };
         Collections.sort(list, comparator);

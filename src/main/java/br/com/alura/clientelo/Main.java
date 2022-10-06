@@ -13,27 +13,77 @@ import java.util.*;
 public class Main {
 
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
     public static void main(String[] args) throws IOException, URISyntaxException {
         Pedido[] pedidosArray = ProcessadorDeCsv.processaArquivo("pedidos.csv");
         List<Pedido> pedidos = new ArrayList<>();
-        for (int i = 0; i < pedidosArray.length; i++){
-            if(pedidosArray[i] != null) pedidos.add(pedidosArray[i]);
+        for (int i = 0; i < pedidosArray.length; i++) {
+            if (pedidosArray[i] != null) pedidos.add(pedidosArray[i]);
         }
-        topTresMaiorQuantidade(pedidos);
+        
+        topThreeByQuantityReport(pedidos);
+        orderByCategoryReport(pedidos);
+        orderByMostValuableOrderByCategoryReport(pedidos);
         relatorioGeral(pedidos);
     }
 
-    private static void topTresMaiorQuantidade(List<Pedido> pedidos) {
-        Pedido.orderByQuantidade(pedidos);
+    private static void topThreeByQuantityReport(List<Pedido> pedidos) {
+        Pedido.orderByQuantity(pedidos);
 
         logger.info("##### RELATÓRIO 3 PEDIDOS COM MAIOR QUANTIDADE #####");
         for (int i = 1; i <= 3 && i <= pedidos.size(); i++) {
             logger.info("PRODUTO: {}", pedidos.get(pedidos.size() - i).getProduto());
-            logger.info("QUANTIDADE {}", pedidos.get(pedidos.size() - i).getQuantidade());
+            logger.info("QUANTIDADE {}\n", pedidos.get(pedidos.size() - i).getQuantidade());
         }
     }
 
-    private static void relatorioGeral(List<Pedido> pedidos) {
+    private static void orderByCategoryReport(List<Pedido> pedidos) {
+        Pedido.orderByCategory(pedidos);
+        int quantity = pedidos.get(0).getQuantidade();
+        BigDecimal montante = pedidos.get(0).getPreco();
+
+        logger.info("##### RELATÓRIO DE PEDIDOS ORDENADOS POR CATEGORIA ALFABETICA #####");
+        for (int i = 1; i < pedidos.size(); i++) {
+            if (!(pedidos.get(i - 1).getCategoria().equals(pedidos.get(i).getCategoria())) || i == pedidos.size() - 1) {
+                logger.info("CATEGORIA: {}", pedidos.get(i - 1).getCategoria());
+                logger.info("QUANTIDADE {}", quantity);
+                logger.info("MONTANTE {}\n", montante);
+
+                quantity = pedidos.get(i).getQuantidade();
+                montante = pedidos.get(i).getPreco().multiply(BigDecimal.valueOf(quantity));
+
+            } else {
+                quantity += pedidos.get(i).getQuantidade();
+                montante = montante.add(pedidos.get(i).getPreco().multiply(BigDecimal.valueOf(pedidos.get(i).getQuantidade())));
+            }
+        }
+    }
+
+    private static void orderByMostValuableOrderByCategoryReport (List < Pedido > pedidos) {
+        if (pedidos == null) {
+            logger.info("!!!!!FOI PASSADO UMA LISTA Nula!!!!!\n");
+            return;
+        }
+
+        Pedido.orderByCategory(pedidos);
+
+        Pedido mostValuable = pedidos.get(0);
+
+        logger.info("##### RELATÓRIO DE PEDIDOS MAIS VALIOSOS POR CATEGORIA EM ORDEM ALFABETICA #####");
+        for (int i = 1; i < pedidos.size(); i++) {
+            if (!(mostValuable.getCategoria().equals(pedidos.get(i).getCategoria())) || i == pedidos.size() - 1) {
+                logger.info("CATEGORIA: {}", mostValuable.getCategoria());
+                logger.info("PRODUTO {}", mostValuable.getProduto());
+                logger.info("PRECO {}\n", mostValuable.getPreco());
+                mostValuable = pedidos.get(i);
+            } else {
+                if (mostValuable.getPreco().compareTo(pedidos.get(i).getPreco()) < 0)
+                    mostValuable = pedidos.get(i);
+            }
+        }
+    }
+
+    private static void relatorioGeral (List < Pedido > pedidos) {
 
         int totalDeProdutosVendidos = 0;
         int totalDePedidosRealizados = 0;
