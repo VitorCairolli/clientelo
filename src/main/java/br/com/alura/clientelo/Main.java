@@ -7,23 +7,33 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Path;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
-
     public static void main(String[] args) throws IOException, URISyntaxException {
-        Pedido[] pedidos = ProcessadorDeCsv.processaArquivo("pedidos.csv");
+        Pedido[] pedidosArray = ProcessadorDeCsv.processaArquivo("pedidos.csv");
+        List<Pedido> pedidos = new ArrayList<>();
+        for (int i = 0; i < pedidosArray.length; i++){
+            if(pedidosArray[i] != null) pedidos.add(pedidosArray[i]);
+        }
+        topTresMaiorQuantidade(pedidos);
+        relatorioGeral(pedidos);
+    }
 
+    private static void topTresMaiorQuantidade(List<Pedido> pedidos) {
+        Pedido.orderByQuantidade(pedidos);
+
+        logger.info("##### RELATÓRIO 3 PEDIDOS COM MAIOR QUANTIDADE #####");
+        for (int i = 1; i <= 3 && i <= pedidos.size(); i++) {
+            logger.info("PRODUTO: {}", pedidos.get(pedidos.size() - i).getProduto());
+            logger.info("QUANTIDADE {}", pedidos.get(pedidos.size() - i).getQuantidade());
+        }
+    }
+
+    private static void relatorioGeral(List<Pedido> pedidos) {
 
         int totalDeProdutosVendidos = 0;
         int totalDePedidosRealizados = 0;
@@ -34,8 +44,8 @@ public class Main {
         String[] categoriasProcessadas = new String[10];
         int totalDeCategorias = 0;
 
-        for (int i = 0; i < pedidos.length; i++) {
-            Pedido pedidoAtual = pedidos[i];
+        for (int i = 0; i < pedidos.size(); i++) {
+            Pedido pedidoAtual = pedidos.get(i);
 
             if (pedidoAtual == null) {
                 break;
@@ -86,3 +96,4 @@ public class Main {
         logger.info("### FIM DO RELATÓRIO ###");
     }
 }
+

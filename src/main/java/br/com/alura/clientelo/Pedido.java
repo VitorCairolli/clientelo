@@ -2,6 +2,9 @@ package br.com.alura.clientelo;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class Pedido {
 
@@ -57,6 +60,16 @@ public class Pedido {
                 ", quantidade=" + quantidade +
                 ", data=" + data +
                 '}';
+    }
+
+    public static void orderByQuantidade(List<Pedido> list) {
+        Comparator<Pedido> comparator = new Comparator<Pedido>() {
+            @Override
+            public int compare(Pedido o1, Pedido o2) {
+                return o1.getQuantidade() - o2.getQuantidade();
+            }
+        };
+        Collections.sort(list, comparator);
     }
 
 }
