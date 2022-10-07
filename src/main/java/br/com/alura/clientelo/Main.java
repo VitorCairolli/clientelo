@@ -20,12 +20,8 @@ public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        Pedido[] pedidosArray = ProcessadorDeCsv.processaArquivo("pedidos.csv");
-        List<Pedido> pedidos = new ArrayList<>();
-        for (int i = 0; i < pedidosArray.length; i++) {
-            if (pedidosArray[i] != null) pedidos.add(pedidosArray[i]);
-        }
-
+        List<Pedido> pedidos = ProcessadorDeCsv.processaArquivo("pedidos.csv");
+        
         ReportController reportController = new ReportController(pedidos);
         
         reportController.logReport(new TopThreeByQuantityReport());
