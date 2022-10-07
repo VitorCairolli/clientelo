@@ -9,10 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.net.URISyntaxException;
-import java.text.NumberFormat;
 import java.util.*;
 
 public class Main {
@@ -20,8 +17,8 @@ public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        List<Pedido> pedidos = ProcessadorDeCsv.processaArquivo("pedidos.csv");
-        
+        List<Order> pedidos = ProcessadorDeCsv.processaArquivo("pedidos.csv");
+
         ReportController reportController = new ReportController(pedidos);
         
         reportController.logReport(new TopThreeByQuantityReport());

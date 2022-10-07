@@ -1,7 +1,6 @@
 package br.com.alura.clientelo.reports;
 
-import br.com.alura.clientelo.Main;
-import br.com.alura.clientelo.Pedido;
+import br.com.alura.clientelo.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,38 +16,38 @@ public class DefaultReport implements Report{
     private static final Logger logger = LoggerFactory.getLogger(DefaultReport.class);
 
     @Override
-    public void logReport(List<Pedido> pedidos) {
+    public void logReport(List<Order> pedidos) {
         int totalDeProdutosVendidos = 0;
         int totalDePedidosRealizados = 0;
         BigDecimal montanteDeVendas = BigDecimal.ZERO;
-        Pedido pedidoMaisBarato = null;
-        Pedido pedidoMaisCaro = null;
+        Order pedidoMaisBarato = null;
+        Order pedidoMaisCaro = null;
 
         String[] categoriasProcessadas = new String[10];
         int totalDeCategorias = 0;
 
         for (int i = 0; i < pedidos.size(); i++) {
-            Pedido pedidoAtual = pedidos.get(i);
+            Order pedidoAtual = pedidos.get(i);
 
             if (pedidoAtual == null) {
                 break;
             }
 
-            if (pedidoMaisBarato == null || pedidoAtual.getPreco().multiply(new BigDecimal(pedidoAtual.getQuantidade())).compareTo(pedidoMaisBarato.getPreco().multiply(new BigDecimal(pedidoMaisBarato.getQuantidade()))) < 0) {
+            if (pedidoMaisBarato == null || pedidoAtual.getPrice().multiply(new BigDecimal(pedidoAtual.getQuantity())).compareTo(pedidoMaisBarato.getPrice().multiply(new BigDecimal(pedidoMaisBarato.getQuantity()))) < 0) {
                 pedidoMaisBarato = pedidoAtual;
             }
 
-            if (pedidoMaisCaro == null || pedidoAtual.getPreco().multiply(new BigDecimal(pedidoAtual.getQuantidade())).compareTo(pedidoMaisCaro.getPreco().multiply(new BigDecimal(pedidoMaisCaro.getQuantidade()))) > 0) {
+            if (pedidoMaisCaro == null || pedidoAtual.getPrice().multiply(new BigDecimal(pedidoAtual.getQuantity())).compareTo(pedidoMaisCaro.getPrice().multiply(new BigDecimal(pedidoMaisCaro.getQuantity()))) > 0) {
                 pedidoMaisCaro = pedidoAtual;
             }
 
-            montanteDeVendas = montanteDeVendas.add(pedidoAtual.getPreco().multiply(new BigDecimal(pedidoAtual.getQuantidade())));
-            totalDeProdutosVendidos += pedidoAtual.getQuantidade();
+            montanteDeVendas = montanteDeVendas.add(pedidoAtual.getPrice().multiply(new BigDecimal(pedidoAtual.getQuantity())));
+            totalDeProdutosVendidos += pedidoAtual.getQuantity();
             totalDePedidosRealizados++;
 
             boolean jahProcessouCategoria = false;
             for (int j = 0; j < categoriasProcessadas.length; j++) {
-                if (pedidoAtual.getCategoria().equalsIgnoreCase(categoriasProcessadas[j])) {
+                if (pedidoAtual.getCategory().equalsIgnoreCase(categoriasProcessadas[j])) {
                     jahProcessouCategoria = true;
                 }
             }
@@ -61,7 +60,7 @@ public class DefaultReport implements Report{
                 } else {
                     for (int k = 0; k < categoriasProcessadas.length; k++) {
                         if (categoriasProcessadas[k] == null) {
-                            categoriasProcessadas[k] = pedidoAtual.getCategoria();
+                            categoriasProcessadas[k] = pedidoAtual.getCategory();
                             break;
                         }
                     }
@@ -74,8 +73,8 @@ public class DefaultReport implements Report{
         logger.info("TOTAL DE PRODUTOS VENDIDOS: {}", totalDeProdutosVendidos);
         logger.info("TOTAL DE CATEGORIAS: {}", totalDeCategorias);
         logger.info("MONTANTE DE VENDAS: {}", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(montanteDeVendas.setScale(2, RoundingMode.HALF_DOWN)));
-        logger.info("PEDIDO MAIS BARATO: {} ({})", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(pedidoMaisBarato.getPreco().multiply(new BigDecimal(pedidoMaisBarato.getQuantidade())).setScale(2, RoundingMode.HALF_DOWN)), pedidoMaisBarato.getProduto());
-        logger.info("PEDIDO MAIS CARO: {} ({})\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(pedidoMaisCaro.getPreco().multiply(new BigDecimal(pedidoMaisCaro.getQuantidade())).setScale(2, RoundingMode.HALF_DOWN)), pedidoMaisCaro.getProduto());
+        logger.info("PEDIDO MAIS BARATO: {} ({})", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(pedidoMaisBarato.getPrice().multiply(new BigDecimal(pedidoMaisBarato.getQuantity())).setScale(2, RoundingMode.HALF_DOWN)), pedidoMaisBarato.getProduct());
+        logger.info("PEDIDO MAIS CARO: {} ({})\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(pedidoMaisCaro.getPrice().multiply(new BigDecimal(pedidoMaisCaro.getQuantity())).setScale(2, RoundingMode.HALF_DOWN)), pedidoMaisCaro.getProduct());
         logger.info("### FIM DO RELATÓRIO ###");
     }
 }

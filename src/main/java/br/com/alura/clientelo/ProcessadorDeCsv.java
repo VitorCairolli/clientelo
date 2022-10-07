@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class ProcessadorDeCsv {
 
-    public static List<Pedido> processaArquivo(String nomeDoArquivo) {
+    public static List<Order> processaArquivo(String nomeDoArquivo) {
         try {
             URL recursoCSV = ClassLoader.getSystemResource(nomeDoArquivo);
             Path caminhoDoArquivo = caminhoDoArquivo = Path.of(recursoCSV.toURI());
@@ -22,7 +22,7 @@ public class ProcessadorDeCsv {
 
             leitorDeLinhas.nextLine();
 
-            List<Pedido> pedidos = new ArrayList<>();
+            List<Order> pedidos = new ArrayList<>();
 
             while (leitorDeLinhas.hasNextLine()) {
                 String linha = leitorDeLinhas.nextLine();
@@ -35,7 +35,7 @@ public class ProcessadorDeCsv {
                 LocalDate data = LocalDate.parse(registro[4], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 String cliente = registro[5];
 
-                Pedido pedido = new Pedido(categoria, produto, cliente, preco, quantidade, data);
+                Order pedido = new Order(categoria, produto, cliente, preco, quantidade, data);
                 pedidos.add(pedido);
             }
 

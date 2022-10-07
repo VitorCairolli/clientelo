@@ -1,6 +1,7 @@
 package br.com.alura.clientelo.reports;
 
-import br.com.alura.clientelo.Pedido;
+import br.com.alura.clientelo.Order;
+import br.com.alura.clientelo.reports.comparators.OrderCategoryComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,26 +12,26 @@ public class MostValuableOrderedByCategoryReport implements Report{
     private static final Logger logger = LoggerFactory.getLogger(MostValuableOrderedByCategoryReport.class);
 
     @Override
-    public void logReport(List<Pedido> pedidos) {
-        if (pedidos == null) {
+    public void logReport(List<Order> orders) {
+        if (orders == null) {
             logger.info("!!!!!FOI PASSADO UMA LISTA Nula!!!!!\n");
             return;
         }
 
-        Pedido.orderByCategory(pedidos);
+        orders.sort(new OrderCategoryComparator());
 
-        Pedido mostValuable = pedidos.get(0);
+        Order mostValuable = orders.get(0);
 
         logger.info("##### RELATÓRIO DE PEDIDOS MAIS VALIOSOS POR CATEGORIA EM ORDEM ALFABETICA #####");
-        for (int i = 1; i < pedidos.size(); i++) {
-            if (!(mostValuable.getCategoria().equals(pedidos.get(i).getCategoria())) || i == pedidos.size() - 1) {
-                logger.info("CATEGORIA: {}", mostValuable.getCategoria());
-                logger.info("PRODUTO {}", mostValuable.getProduto());
-                logger.info("PRECO {}\n", mostValuable.getPreco());
-                mostValuable = pedidos.get(i);
+        for (int i = 1; i < orders.size(); i++) {
+            if (!(mostValuable.getCategory().equals(orders.get(i).getCategory())) || i == orders.size() - 1) {
+                logger.info("CATEGORIA: {}", mostValuable.getCategory());
+                logger.info("PRODUTO {}", mostValuable.getProduct());
+                logger.info("PRECO {}\n", mostValuable.getPrice());
+                mostValuable = orders.get(i);
             } else {
-                if (mostValuable.getPreco().compareTo(pedidos.get(i).getPreco()) < 0)
-                    mostValuable = pedidos.get(i);
+                if (mostValuable.getPrice().compareTo(orders.get(i).getPrice()) < 0)
+                    mostValuable = orders.get(i);
             }
         }
     }
