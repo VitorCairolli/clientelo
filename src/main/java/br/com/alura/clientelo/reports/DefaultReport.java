@@ -68,7 +68,6 @@ public class DefaultReport implements Report{
             }
         }
 
-        logger.info("##### RELATÓRIO DE VALORES TOTAIS #####");
         logger.info("TOTAL DE PEDIDOS REALIZADOS: {}", totalDePedidosRealizados);
         logger.info("TOTAL DE PRODUTOS VENDIDOS: {}", totalDeProdutosVendidos);
         logger.info("TOTAL DE CATEGORIAS: {}", totalDeCategorias);
@@ -76,5 +75,10 @@ public class DefaultReport implements Report{
         logger.info("PEDIDO MAIS BARATO: {} ({})", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(pedidoMaisBarato.getPrice().multiply(new BigDecimal(pedidoMaisBarato.getQuantity())).setScale(2, RoundingMode.HALF_DOWN)), pedidoMaisBarato.getProduct());
         logger.info("PEDIDO MAIS CARO: {} ({})\n", NumberFormat.getCurrencyInstance(new Locale("pt", "BR")).format(pedidoMaisCaro.getPrice().multiply(new BigDecimal(pedidoMaisCaro.getQuantity())).setScale(2, RoundingMode.HALF_DOWN)), pedidoMaisCaro.getProduct());
         logger.info("### FIM DO RELATÓRIO ###");
+    }
+
+    @Override
+    public String title(){
+        return "RELATÓRIO DE VALORES TOTAIS";
     }
 }

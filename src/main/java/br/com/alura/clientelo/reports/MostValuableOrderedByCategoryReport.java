@@ -22,7 +22,6 @@ public class MostValuableOrderedByCategoryReport implements Report{
 
         Order mostValuable = orders.get(0);
 
-        logger.info("##### RELATÓRIO DE PEDIDOS MAIS VALIOSOS POR CATEGORIA EM ORDEM ALFABETICA #####");
         for (int i = 1; i < orders.size(); i++) {
             if (!(mostValuable.getCategory().equals(orders.get(i).getCategory())) || i == orders.size() - 1) {
                 logger.info("CATEGORIA: {}", mostValuable.getCategory());
@@ -34,5 +33,10 @@ public class MostValuableOrderedByCategoryReport implements Report{
                     mostValuable = orders.get(i);
             }
         }
+    }
+
+    @Override
+    public String title(){
+        return "RELATÓRIO DE PEDIDOS MAIS VALIOSOS POR CATEGORIA EM ORDEM ALFABETICA";
     }
 }

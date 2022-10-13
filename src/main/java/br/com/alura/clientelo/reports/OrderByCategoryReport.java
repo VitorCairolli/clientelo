@@ -20,11 +20,15 @@ public class OrderByCategoryReport implements Report {
 
         List<OrderCategorySummary> categorySummaryList = OrderHelper.categorySummaryList(orders);
 
-        logger.info("##### RELATÓRIO 3 PEDIDOS COM MAIOR QUANTIDADE #####");
         for (OrderCategorySummary summary : categorySummaryList) {
             logger.info("CATEGORIA: {}", summary.getCategory());
             logger.info("QUANTIDADE {}\n", summary.getQuantity());
             logger.info("MONTANTE: R$ {}\n", summary.getTotalPrice());
         }
+    }
+
+    @Override
+    public String title(){
+        return "RELATÓRIO POR CATEGORIAS";
     }
 }

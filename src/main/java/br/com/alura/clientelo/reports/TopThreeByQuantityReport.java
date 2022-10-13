@@ -20,10 +20,14 @@ public class TopThreeByQuantityReport implements Report{
 
         orders.sort(new OrderQuantityComparator());
 
-        logger.info("##### RELATÓRIO 3 PEDIDOS COM MAIOR QUANTIDADE #####");
         for (int i = 1; i <= 3 && i <= orders.size(); i++) {
             logger.info("PRODUTO: {}", orders.get(orders.size() - i).getProduct());
             logger.info("QUANTIDADE {}\n", orders.get(orders.size() - i).getQuantity());
         }
+    }
+
+    @Override
+    public String title() {
+        return "RELATÓRIO 3 PEDIDOS COM MAIOR QUANTIDADE";
     }
 }
