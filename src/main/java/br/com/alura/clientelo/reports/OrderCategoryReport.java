@@ -11,6 +11,7 @@ public class OrderCategoryReport implements Report {
 
     private static final Logger logger = LoggerFactory.getLogger(OrderCategoryReport.class);
 
+    List<OrderReportOutput> report = new ArrayList<>();
     @Override
     public void logReport(List<Order> orders) {
 
@@ -31,10 +32,14 @@ public class OrderCategoryReport implements Report {
                     .map(order -> order.getTotalPrice())
                     .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-            logger.info("CATEGORIA: {}", category);
-            logger.info("QUANTIDADE {}", totalQuantity);
-            logger.info("MONTANTE: R$ {}\n", totalPrice);
+            report.add(OrderReportOutput.Builder.newInstance()
+                    .setCategory(category)
+                    .setQuantity(totalQuantity)
+                    .setTotalPrice(totalPrice)
+                    .build());
         }
+
+        ReportGenerator.logReport(title(), report);
     }
 
     @Override

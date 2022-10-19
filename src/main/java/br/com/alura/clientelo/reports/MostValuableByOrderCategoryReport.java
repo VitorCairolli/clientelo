@@ -4,12 +4,11 @@ import br.com.alura.clientelo.models.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 public class MostValuableByOrderCategoryReport implements Report{
-
-    private static final Logger logger = LoggerFactory.getLogger(MostValuableByOrderCategoryReport.class);
 
     @Override
     public void logReport(List<Order> orders) {
@@ -20,15 +19,22 @@ public class MostValuableByOrderCategoryReport implements Report{
                 .distinct()
                 .toList();
 
+        List<OrderReportOutput> report = new ArrayList<>();
+
         for (String category : categories) {
             orders.stream()
                     .filter(order -> order.getCategory().equals(category))
                     .toList();
 
-            logger.info("CATEGORIA: {}", category);
-            logger.info("PRODUTO {}", orders.get(0).getProduct());
-            logger.info("PRECO: R$ {}\n", orders.get(0).getTotalPrice());
+            report.add(OrderReportOutput.Builder
+                    .newInstance()
+                    .setCategory(category)
+                    .setProduct(orders.get(0).getProduct())
+                    .setTotalPrice(orders.get(0).getTotalPrice())
+                    .build());
         }
+
+        ReportGenerator.logReport(title(), report);
     }
 
     @Override

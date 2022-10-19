@@ -17,8 +17,6 @@ public class ReportController {
     }
 
     public void logReport(Report report) {
-        logger.info("###### " + report.title() + " ######\n");
-
         if(orders == null)
             logger.info("!!!!!FOI PASSADO UMA LISTA NULA!!!!!\n");
 
