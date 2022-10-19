@@ -1,24 +1,20 @@
 package br.com.alura.clientelo.reports;
 
-import br.com.alura.clientelo.Order;
-import br.com.alura.clientelo.reports.comparators.OrderQuantityComparator;
+import br.com.alura.clientelo.models.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Comparator;
 import java.util.List;
 
-public class TopThreeByQuantityReport implements Report{
+public class TopThreeOrdersByQuantityReport implements Report{
 
-    private static final Logger logger = LoggerFactory.getLogger(TopThreeByQuantityReport.class);
+    private static final Logger logger = LoggerFactory.getLogger(TopThreeOrdersByQuantityReport.class);
 
     @Override
     public void logReport(List<Order> orders) {
-        if (orders == null) {
-            logger.info("!!!!!FOI PASSADO UMA LISTA Nula!!!!!\n");
-            return;
-        }
 
-        orders.sort(new OrderQuantityComparator());
+        orders.sort(Comparator.comparing(Order::getQuantity));
 
         for (int i = 1; i <= 3 && i <= orders.size(); i++) {
             logger.info("PRODUTO: {}", orders.get(orders.size() - i).getProduct());

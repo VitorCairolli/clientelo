@@ -1,6 +1,6 @@
 package br.com.alura.clientelo.reports;
 
-import br.com.alura.clientelo.Order;
+import br.com.alura.clientelo.models.Order;
 
 import java.util.List;
 

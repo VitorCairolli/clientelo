@@ -1,10 +1,11 @@
 package br.com.alura.clientelo;
 
 import br.com.alura.clientelo.controllers.ReportController;
+import br.com.alura.clientelo.models.Order;
 import br.com.alura.clientelo.reports.DefaultReport;
-import br.com.alura.clientelo.reports.MostValuableOrderedByCategoryReport;
-import br.com.alura.clientelo.reports.OrderByCategoryReport;
-import br.com.alura.clientelo.reports.TopThreeByQuantityReport;
+import br.com.alura.clientelo.reports.MostValuableByOrderCategoryReport;
+import br.com.alura.clientelo.reports.OrderCategoryReport;
+import br.com.alura.clientelo.reports.TopThreeOrdersByQuantityReport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,9 +22,9 @@ public class Main {
 
         ReportController reportController = new ReportController(pedidos);
         
-        reportController.logReport(new TopThreeByQuantityReport());
-        reportController.logReport(new OrderByCategoryReport());
-        reportController.logReport(new MostValuableOrderedByCategoryReport());
+        reportController.logReport(new TopThreeOrdersByQuantityReport());
+        reportController.logReport(new OrderCategoryReport());
+        reportController.logReport(new MostValuableByOrderCategoryReport());
         reportController.logReport(new DefaultReport());
     }
 }
