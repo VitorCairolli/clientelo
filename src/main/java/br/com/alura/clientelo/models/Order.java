@@ -10,14 +10,13 @@ public class Order {
 
     private String category;
     private String product;
-    private String client;
-
+    private Client client;
     private BigDecimal price;
     private int quantity;
     private BigDecimal totalPrice;
     private LocalDate date;
 
-    public Order(String categoria, String produto, String cliente, BigDecimal preco, int quantidade, LocalDate data) {
+    public Order(String categoria, String produto, Client cliente, BigDecimal preco, int quantidade, LocalDate data) {
         this.category = categoria;
         this.product = produto;
         this.client = cliente;
@@ -35,7 +34,7 @@ public class Order {
         return product;
     }
 
-    public String getClient() {
+    public Client getClient() {
         return client;
     }
 

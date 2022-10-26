@@ -1,5 +1,7 @@
 package br.com.alura.clientelo;
 
+import br.com.alura.clientelo.models.Address;
+import br.com.alura.clientelo.models.Client;
 import br.com.alura.clientelo.models.Order;
 
 import java.io.IOException;
@@ -25,6 +27,7 @@ public class ProcessadorDeCsv {
             leitorDeLinhas.nextLine();
 
             List<Order> pedidos = new ArrayList<>();
+            int i = 0;
 
             while (leitorDeLinhas.hasNextLine()) {
                 String linha = leitorDeLinhas.nextLine();
@@ -35,10 +38,18 @@ public class ProcessadorDeCsv {
                 BigDecimal preco = new BigDecimal(registro[2]);
                 int quantidade = Integer.parseInt(registro[3]);
                 LocalDate data = LocalDate.parse(registro[4], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                String cliente = registro[5];
+                String clientName = registro[5];
+                String clientEmail = registro[6];
+                String clientAddressStreet = registro[7];
+                String clientAddressNumber = registro[8];
+                String clientAddressComplement = registro[9];
 
-                Order pedido = new Order(categoria, produto, cliente, preco, quantidade, data);
+                Client client = new Client(clientName, "email"+ i +"@email.com", new Address("rua" + i, "42", "complemento" + i));
+
+                Order pedido = new Order(categoria, produto, client, preco, quantidade, data);
                 pedidos.add(pedido);
+
+                i++;
             }
 
             return pedidos;
