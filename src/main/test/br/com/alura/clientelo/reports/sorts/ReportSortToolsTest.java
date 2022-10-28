@@ -140,13 +140,18 @@ public class ReportSortToolsTest extends CsvProcessor {
 
         Assert.assertTrue(categorySummaryMap.containsKey("AUTOMOTIVA"));
         Assert.assertEquals(BigDecimal.valueOf(1987.97).setScale(2), categorySummaryMap.get("AUTOMOTIVA").getPrice());
+        Assert.assertEquals(2, categorySummaryMap.get("AUTOMOTIVA").getQuantity());
         Assert.assertTrue(categorySummaryMap.containsKey("CELULARES"));
         Assert.assertEquals(BigDecimal.valueOf(97801.50).setScale(2), categorySummaryMap.get("CELULARES").getPrice());
+        Assert.assertEquals(11, categorySummaryMap.get("CELULARES").getQuantity());
         Assert.assertTrue(categorySummaryMap.containsKey("INFORMÁTICA"));
         Assert.assertEquals(BigDecimal.valueOf(64698.40).setScale(2), categorySummaryMap.get("INFORMÁTICA").getPrice());
+        Assert.assertEquals(9, categorySummaryMap.get("INFORMÁTICA").getQuantity());
         Assert.assertTrue(categorySummaryMap.containsKey("LIVROS"));
         Assert.assertEquals(BigDecimal.valueOf(1507.64).setScale(2), categorySummaryMap.get("LIVROS").getPrice());
+        Assert.assertEquals(9, categorySummaryMap.get("LIVROS").getQuantity());
         Assert.assertTrue(categorySummaryMap.containsKey("MÓVEIS"));
         Assert.assertEquals(BigDecimal.valueOf(12378.98).setScale(2), categorySummaryMap.get("MÓVEIS").getPrice());
+        Assert.assertEquals(4, categorySummaryMap.get("MÓVEIS").getQuantity());
     }
 }
