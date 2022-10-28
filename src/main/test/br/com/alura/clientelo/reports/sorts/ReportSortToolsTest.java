@@ -70,7 +70,7 @@ public class ReportSortToolsTest extends CsvProcessor {
     }
 
     @Test
-    void returnMostValuablePerCategory(){
+    void returnMostValuablePerCategoryOrderedByCategory(){
         Map<String, Order> mostValuableMap= ReportSortTools.mostValuableOrderPerCategoryMap(orders);
 
         Order first = new Order("AUTOMOTIVA",
@@ -133,5 +133,20 @@ public class ReportSortToolsTest extends CsvProcessor {
         Assert.assertEquals(mostValuableMap.get("INFORMÁTICA"), third);
         Assert.assertEquals(mostValuableMap.get("LIVROS"), fourth);
         Assert.assertEquals(mostValuableMap.get("MÓVEIS"), fifth);
+    }
+    @Test
+    void returnCategorySummaryMapOfEachCategoryOrderedByCategory(){
+        Map<String, CategorySummary> categorySummaryMap = ReportSortTools.categoriesSummaryMap(orders);
+
+        Assert.assertTrue(categorySummaryMap.containsKey("AUTOMOTIVA"));
+        Assert.assertEquals(BigDecimal.valueOf(1987.97).setScale(2), categorySummaryMap.get("AUTOMOTIVA").getPrice());
+        Assert.assertTrue(categorySummaryMap.containsKey("CELULARES"));
+        Assert.assertEquals(BigDecimal.valueOf(97801.50).setScale(2), categorySummaryMap.get("CELULARES").getPrice());
+        Assert.assertTrue(categorySummaryMap.containsKey("INFORMÁTICA"));
+        Assert.assertEquals(BigDecimal.valueOf(64698.40).setScale(2), categorySummaryMap.get("INFORMÁTICA").getPrice());
+        Assert.assertTrue(categorySummaryMap.containsKey("LIVROS"));
+        Assert.assertEquals(BigDecimal.valueOf(1507.64).setScale(2), categorySummaryMap.get("LIVROS").getPrice());
+        Assert.assertTrue(categorySummaryMap.containsKey("MÓVEIS"));
+        Assert.assertEquals(BigDecimal.valueOf(12378.98).setScale(2), categorySummaryMap.get("MÓVEIS").getPrice());
     }
 }
