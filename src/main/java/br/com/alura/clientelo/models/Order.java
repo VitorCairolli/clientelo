@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 public class Order {
 
@@ -50,6 +51,25 @@ public class Order {
 
     public LocalDate getDate() {
         return date;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return quantity == order.quantity &&
+                Objects.equals(category, order.category) &&
+                Objects.equals(product, order.product) &&
+                Objects.equals(client, order.client) &&
+                Objects.equals(price, order.price) &&
+                Objects.equals(totalPrice, order.totalPrice) &&
+                Objects.equals(date, order.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(category, product, client, price, quantity, totalPrice, date);
     }
 
     @Override

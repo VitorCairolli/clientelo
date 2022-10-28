@@ -44,7 +44,11 @@ public class ProcessadorDeCsv {
                 String clientAddressNumber = registro[8];
                 String clientAddressComplement = registro[9];
 
-                Client client = new Client(clientName, "email"+ i +"@email.com", new Address("rua" + i, "42", "complemento" + i));
+                Client client = new Client(clientName,
+                        clientEmail,
+                        new Address(clientAddressStreet,
+                                clientAddressNumber,
+                                clientAddressComplement));
 
                 Order pedido = new Order(categoria, produto, client, preco, quantidade, data);
                 pedidos.add(pedido);

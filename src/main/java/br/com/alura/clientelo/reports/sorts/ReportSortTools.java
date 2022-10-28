@@ -41,8 +41,12 @@ public class ReportSortTools {
     }
 
     public static List<Order> topThreeOrdersByQuantity(List<Order> orders){
-        return orders.stream().sorted(Comparator.comparing(Order::getQuantity).reversed())
-                .toList()
-                .subList(0,3);
+        List<Order> topThreeOrders = orders.stream().sorted(Comparator.comparing(Order::getQuantity).reversed())
+                .toList();
+
+        if(topThreeOrders.size() > 3)
+            return  topThreeOrders.subList(0,3);
+
+        return topThreeOrders;
     }
 }

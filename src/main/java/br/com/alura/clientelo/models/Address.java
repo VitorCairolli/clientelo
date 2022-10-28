@@ -1,5 +1,7 @@
 package br.com.alura.clientelo.models;
 
+import java.util.Objects;
+
 public class Address {
 
     private String street;
@@ -22,6 +24,19 @@ public class Address {
 
     public String getComplement() {
         return complement;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return Objects.equals(street, address.street) && Objects.equals(number, address.number) && Objects.equals(complement, address.complement);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(street, number, complement);
     }
 
     @Override
