@@ -3,7 +3,7 @@ package br.com.alura.clientelo.reports;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-final class OrderReportOutput {
+public final class OrderReportOutput {
 
     private String category;
     private String product;

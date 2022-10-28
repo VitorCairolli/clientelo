@@ -1,6 +1,7 @@
 package br.com.alura.clientelo.reports;
 
 import br.com.alura.clientelo.models.Order;
+import br.com.alura.clientelo.reports.sorts.ReportSortTools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,15 +17,15 @@ public class TopThreeOrdersByQuantityReport implements Report{
     @Override
     public void logReport(List<Order> orders) {
 
-        orders.sort(Comparator.comparing(Order::getQuantity));
-
         List<OrderReportOutput> report = new ArrayList<>();
 
-        for (int i = 1; i <= 3 && i <= orders.size(); i++) {
+        List<Order> topThreeOrders = ReportSortTools.topThreeOrdersByQuantity(orders);
+
+        for (Order order : topThreeOrders) {
 
             report.add(OrderReportOutput.Builder.newInstance()
-                    .setProduct(orders.get(orders.size() - i).getProduct())
-                    .setQuantity(BigDecimal.valueOf(orders.get(orders.size() - i).getQuantity()))
+                    .setProduct(order.getProduct())
+                    .setQuantity(BigDecimal.valueOf(order.getQuantity()))
                     .build());
         }
 

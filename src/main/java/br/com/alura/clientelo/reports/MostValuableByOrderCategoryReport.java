@@ -1,38 +1,31 @@
 package br.com.alura.clientelo.reports;
 
 import br.com.alura.clientelo.models.Order;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import br.com.alura.clientelo.reports.sorts.ReportSortTools;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.function.BiConsumer;
 
 public class MostValuableByOrderCategoryReport implements Report{
 
     @Override
     public void logReport(List<Order> orders) {
 
-        orders.sort(Comparator.comparing(Order::getCategory));
-        List<String> categories = orders.stream()
-                .map(order -> order.getCategory())
-                .distinct()
-                .toList();
-
         List<OrderReportOutput> report = new ArrayList<>();
 
-        for (String category : categories) {
-            orders.stream()
-                    .filter(order -> order.getCategory().equals(category))
-                    .toList();
+        Map<String, Order> mostValuableOrders = ReportSortTools.mostValuableOrderPerCategoryMap(orders);
 
+        mostValuableOrders.forEach((category, order) -> {
             report.add(OrderReportOutput.Builder
                     .newInstance()
                     .setCategory(category)
-                    .setProduct(orders.get(0).getProduct())
-                    .setTotalPrice(orders.get(0).getTotalPrice())
+                    .setProduct(order.getProduct())
+                    .setTotalPrice(order.getTotalPrice())
                     .build());
-        }
+        });
 
         ReportGenerator.logReport(title(), report);
     }

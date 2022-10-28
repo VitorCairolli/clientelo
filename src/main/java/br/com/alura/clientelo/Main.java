@@ -18,9 +18,9 @@ public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        List<Order> pedidos = ProcessadorDeCsv.processaArquivo("pedidos.csv");
+        List<Order> orders = ProcessadorDeCsv.processaArquivo("pedidos.csv");
 
-        ReportController reportController = new ReportController(pedidos);
+        ReportController reportController = new ReportController(orders);
         
         reportController.logReport(new TopThreeOrdersByQuantityReport());
         reportController.logReport(new OrderCategoryReport());
