@@ -10,9 +10,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 public class ReportSortToolsTest extends CsvProcessor {
-
     @Test
     void returnTopThreeOrdersByQuantity() {
         List<Order> topThreeOrdersByQuantity = ReportSortTools.topThreeOrdersByQuantity(orders);
@@ -67,5 +67,71 @@ public class ReportSortToolsTest extends CsvProcessor {
         List<Order> Order = ReportSortTools.topThreeOrdersByQuantity(orders.subList(0,1));
 
         Assert.assertEquals(Order.size(), 1);
+    }
+
+    @Test
+    void returnMostValuablePerCategory(){
+        Map<String, Order> mostValuableMap= ReportSortTools.mostValuableOrderPerCategoryMap(orders);
+
+        Order first = new Order("AUTOMOTIVA",
+                "Jogo de pneus",
+                new Client("BIA",
+                        "bianca@hotmail.com",
+                        new Address("Rua Biancaneira",
+                                "781",
+                                "nenhum")),
+                BigDecimal.valueOf(1276.79).setScale(2),
+                1,
+                LocalDate.parse("15/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+        Order second = new Order("CELULARES",
+                "iPhone 13 Pro",
+                new Client("ANA",
+                        "anaAgiota@gmail.com",
+                        new Address("Rua Pinheiros Grandes",
+                                "552",
+                                "ap 52")),
+                BigDecimal.valueOf(9176.00).setScale(2),
+                6,
+                LocalDate.parse("13/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+        Order third = new Order("INFORMÁTICA",
+                "Macbook Pro 16",
+                new Client("CAIO",
+                        "caioNoBait@gmail.com",
+                        new Address("Rua Tetriz",
+                                "444",
+                                "Moro na casa do fundo")),
+                BigDecimal.valueOf(31752.00).setScale(2),
+                1,
+                LocalDate.parse("03/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+        Order fourth = new Order("LIVROS",
+                "Building Microservices",
+                new Client("CAIO",
+                        "caioNoBait@gmail.com",
+                        new Address("Rua Tetriz",
+                                "444",
+                                "Moro na casa do fundo")),
+                BigDecimal.valueOf(300.28).setScale(2),
+                2,
+                LocalDate.parse("11/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+        Order fifth = new Order("MÓVEIS",
+                "Cama queen size",
+                new Client("DANI",
+                        "danista@gmail.com",
+                        new Address("Rua DANIficada",
+                                "57",
+                                "nenhum")),
+                BigDecimal.valueOf(3100.00).setScale(2),
+                2,
+                LocalDate.parse("07/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+        Assert.assertEquals(mostValuableMap.get("AUTOMOTIVA"), first);
+        Assert.assertEquals(mostValuableMap.get("CELULARES"), second);
+        Assert.assertEquals(mostValuableMap.get("INFORMÁTICA"), third);
+        Assert.assertEquals(mostValuableMap.get("LIVROS"), fourth);
+        Assert.assertEquals(mostValuableMap.get("MÓVEIS"), fifth);
     }
 }
