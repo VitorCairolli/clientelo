@@ -2,9 +2,6 @@ package br.com.alura.clientelo.models;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Objects;
 
 public class Order {
@@ -14,7 +11,6 @@ public class Order {
     private Client client;
     private BigDecimal price;
     private int quantity;
-    private BigDecimal totalPrice;
     private LocalDate date;
 
     public Order(String categoria, String produto, Client cliente, BigDecimal preco, int quantidade, LocalDate data) {
@@ -24,7 +20,6 @@ public class Order {
         this.price = preco;
         this.quantity = quantidade;
         this.date = data;
-        this.totalPrice = price.multiply(BigDecimal.valueOf(quantity));
     }
 
     public String getCategory() {
@@ -46,11 +41,21 @@ public class Order {
     public int getQuantity() {
         return quantity;
     }
-    
-    public BigDecimal getTotalPrice(){return totalPrice;}
 
     public LocalDate getDate() {
         return date;
+    }
+    
+    public BigDecimal getTotalPrice(){
+        return price.multiply(BigDecimal.valueOf(quantity));
+    }
+
+    public boolean isMoreExpensiveThan(Order otherOrder){
+        return this.getTotalPrice().compareTo(otherOrder.getTotalPrice()) > 0;
+    }
+
+    public boolean isLessExpensiveThan(Order otherOrder){
+        return this.getTotalPrice().compareTo(otherOrder.getTotalPrice()) < 0;
     }
 
     @Override
@@ -63,13 +68,12 @@ public class Order {
                 Objects.equals(product, order.product) &&
                 Objects.equals(client, order.client) &&
                 Objects.equals(price, order.price) &&
-                Objects.equals(totalPrice, order.totalPrice) &&
                 Objects.equals(date, order.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(category, product, client, price, quantity, totalPrice, date);
+        return Objects.hash(category, product, client, price, quantity, date);
     }
 
     @Override
