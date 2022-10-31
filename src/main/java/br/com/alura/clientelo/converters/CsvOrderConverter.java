@@ -1,4 +1,4 @@
-package br.com.alura.clientelo;
+package br.com.alura.clientelo.converters;
 
 import br.com.alura.clientelo.models.Address;
 import br.com.alura.clientelo.models.Client;
@@ -15,12 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ProcessadorDeCsv {
+public class CsvOrderConverter {
 
-    public static List<Order> processaArquivo(String nomeDoArquivo) {
+    public static List<Order> convert(String fileName) {
         try {
-            URL recursoCSV = ClassLoader.getSystemResource(nomeDoArquivo);
-            Path caminhoDoArquivo = caminhoDoArquivo = Path.of(recursoCSV.toURI());
+            URL recursoCSV = ClassLoader.getSystemResource(fileName);
+            Path caminhoDoArquivo = Path.of(recursoCSV.toURI());
 
             Scanner leitorDeLinhas = new Scanner(caminhoDoArquivo);
 
@@ -58,7 +58,7 @@ public class ProcessadorDeCsv {
 
             return pedidos;
         } catch (URISyntaxException e) {
-            throw new RuntimeException(String.format("Arquivo {} não localizado!", nomeDoArquivo));
+            throw new RuntimeException(String.format("Arquivo {} não localizado!", fileName));
         } catch (IOException e) {
             throw new RuntimeException("Erro ao abrir Scanner para processar arquivo!");
         }

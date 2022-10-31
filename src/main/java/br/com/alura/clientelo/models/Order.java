@@ -1,5 +1,13 @@
 package br.com.alura.clientelo.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -11,15 +19,19 @@ public class Order {
     private Client client;
     private BigDecimal price;
     private int quantity;
+
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     private LocalDate date;
 
-    public Order(String categoria, String produto, Client cliente, BigDecimal preco, int quantidade, LocalDate data) {
-        this.category = categoria;
-        this.product = produto;
-        this.client = cliente;
-        this.price = preco;
-        this.quantity = quantidade;
-        this.date = data;
+    Order(){};
+
+    public Order(String category, String product, Client client, BigDecimal price, int quantity, LocalDate date) {
+        this.category = category;
+        this.product = product;
+        this.client = client;
+        this.price = price;
+        this.quantity = quantity;
+        this.date = date;
     }
 
     public String getCategory() {

@@ -8,6 +8,8 @@ public class Address {
     private String number;
     private String complement;
 
+    Address(){}
+
     public Address(String street, String number, String complement) {
         this.street = street;
         this.number = number;

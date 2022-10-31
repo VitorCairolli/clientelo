@@ -9,7 +9,6 @@ public class ReportGenerator {
 
     private static final Logger logger = LoggerFactory.getLogger(ReportGenerator.class);
 
-
     static void logReport(String reportName, List<OrderReportOutput> reportOutput){
         String report = "#######" + reportName + "#######\n";
         for (OrderReportOutput output : reportOutput){

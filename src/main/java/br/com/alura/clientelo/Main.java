@@ -1,6 +1,8 @@
 package br.com.alura.clientelo;
 
 import br.com.alura.clientelo.controllers.ReportController;
+import br.com.alura.clientelo.converters.CsvOrderConverter;
+import br.com.alura.clientelo.converters.JsonOrderConverter;
 import br.com.alura.clientelo.models.Order;
 import br.com.alura.clientelo.reports.DefaultReport;
 import br.com.alura.clientelo.reports.MostValuableByOrderCategoryReport;
@@ -18,7 +20,7 @@ public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        List<Order> orders = ProcessadorDeCsv.processaArquivo("orders.csv");
+        List<Order> orders = JsonOrderConverter.convert("orders.json");
 
         ReportController reportController = new ReportController(orders);
         
