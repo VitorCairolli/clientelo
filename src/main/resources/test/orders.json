@@ -1,0 +1,258 @@
+[
+  {
+    "category": "INFORMÁTICA",
+    "product": "Notebook Samsung",
+    "price": 3523,
+    "quantity": 1,
+    "date": "01-01-2022",
+    "client": {
+      "name": "ANA",
+      "email": "anaAgiota@gmail.com",
+      "address": {
+        "street": "Rua Pinheiros Grandes",
+        "number": 552,
+        "complement": "ap 52"
+      }
+    }
+  },
+  {
+    "category": "MÓVEIS",
+    "product": "Sofá 3 lugares",
+    "price": 2500,
+    "quantity": 1,
+    "date": "05-01-2022",
+    "client": {
+      "name": "ANA",
+      "email": "anaAgiota@gmail.com",
+      "address": {
+        "street": "Rua Pinheiros Grandes",
+        "number": 552,
+        "complement": "ap 52"
+      }
+    }
+  },
+  {
+    "category": "LIVROS",
+    "product": "Clean Architecture",
+    "price": 102.9,
+    "quantity": 2,
+    "date": "08-01-2022",
+    "client": {
+      "name": "ANA",
+      "email": "anaAgiota@gmail.com",
+      "address": {
+        "street": "Rua Pinheiros Grandes",
+        "number": 552,
+        "complement": "ap 52"
+      }
+    }
+  },
+  {
+    "category": "MÓVEIS",
+    "product": "Mesa de jantar 6 lugares",
+    "price": 3678.98,
+    "quantity": 1,
+    "date": "06-01-2022",
+    "client": {
+      "name": "ELI",
+      "email": "ELIminadoraDeBobos@gmail.com",
+      "address": {
+        "street": "Rua Macabra",
+        "number": 13,
+        "complement": "ap 1"
+      }
+    }
+  },
+  {
+    "category": "CELULARES",
+    "product": "iPhone 13 Pro",
+    "price": 9176,
+    "quantity": 6,
+    "date": "13-01-2022",
+    "client": {
+      "name": "ANA",
+      "email": "anaAgiota@gmail.com",
+      "address": {
+        "street": "Rua Pinheiros Grandes",
+        "number": 552,
+        "complement": "ap 52"
+      }
+    }
+  },
+  {
+    "category": "INFORMÁTICA",
+    "product": "Monitor Dell 27",
+    "price": 1889,
+    "quantity": 3,
+    "date": "04-01-2022",
+    "client": {
+      "name": "DANI",
+      "email": "danista@gmail.com",
+      "address": {
+        "street": "Rua DANIficada",
+        "number": 57,
+        "complement": "nenhum"
+      }
+    }
+  },
+  {
+    "category": "LIVROS",
+    "product": "Implementing Domain-Driven Design",
+    "price": 144.07,
+    "quantity": 3,
+    "date": "10-01-2022",
+    "client": {
+      "name": "GABI",
+      "email": "gabinete@gmail.com",
+      "address": {
+        "street": "Rua Casaco",
+        "number": 12,
+        "complement": "nenhum"
+      }
+    }
+  },
+  {
+    "category": "AUTOMOTIVA",
+    "product": "Jogo de pneus",
+    "price": 1276.79,
+    "quantity": 1,
+    "date": "15-01-2022",
+    "client": {
+      "name": "BIA",
+      "email": "bianca@hotmail.com",
+      "address": {
+        "street": "Rua Biancaneira",
+        "number": 781,
+        "complement": "nenhum"
+      }
+    }
+  },
+  {
+    "category": "LIVROS",
+    "product": "Clean Code",
+    "price": 95.17,
+    "quantity": 1,
+    "date": "09-01-2022",
+    "client": {
+      "name": "BIA",
+      "email": "bianca@hotmail.com",
+      "address": {
+        "street": "Rua Biancaneira",
+        "number": 781,
+        "complement": "nenhum"
+      }
+    }
+  },
+  {
+    "category": "CELULARES",
+    "product": "Galaxy S22 Ultra",
+    "price": 8549.1,
+    "quantity": 5,
+    "date": "14-01-2022",
+    "client": {
+      "name": "DANI",
+      "email": "danista@gmail.com",
+      "address": {
+        "street": "Rua DANIficada",
+        "number": 57,
+        "complement": "nenhum"
+      }
+    }
+  },
+  {
+    "category": "INFORMÁTICA",
+    "product": "Macbook Pro 16",
+    "price": 31752,
+    "quantity": 1,
+    "date": "03-01-2022",
+    "client": {
+      "name": "CAIO",
+      "email": "caioNoBait@gmail.com",
+      "address": {
+        "street": "Rua Tetriz",
+        "number": 444,
+        "complement": "Moro na casa do fundo"
+      }
+    }
+  },
+  {
+    "category": "LIVROS",
+    "product": "Refactoring Improving the Design of Existing Code",
+    "price": 173.9,
+    "quantity": 1,
+    "date": "12-01-2022",
+    "client": {
+      "name": "DANI",
+      "email": "danista@gmail.com",
+      "address": {
+        "street": "Rua DANIficada",
+        "number": 57,
+        "complement": "nenhum"
+      }
+    }
+  },
+  {
+    "category": "MÓVEIS",
+    "product": "Cama queen size",
+    "price": 3100,
+    "quantity": 2,
+    "date": "07-01-2022",
+    "client": {
+      "name": "DANI",
+      "email": "danista@gmail.com",
+      "address": {
+        "street": "Rua DANIficada",
+        "number": 57,
+        "complement": "nenhum"
+      }
+    }
+  },
+  {
+    "category": "AUTOMOTIVA",
+    "product": "Central multimidia",
+    "price": 711.18,
+    "quantity": 1,
+    "date": "16-01-2022",
+    "client": {
+      "name": "CAIO",
+      "email": "caioNoBait@gmail.com",
+      "address": {
+        "street": "Rua Tetriz",
+        "number": 444,
+        "complement": "Moro na casa do fundo"
+      }
+    }
+  },
+  {
+    "category": "LIVROS",
+    "product": "Building Microservices",
+    "price": 300.28,
+    "quantity": 2,
+    "date": "11-01-2022",
+    "client": {
+      "name": "CAIO",
+      "email": "caioNoBait@gmail.com",
+      "address": {
+        "street": "Rua Tetriz",
+        "number": 444,
+        "complement": "Moro na casa do fundo"
+      }
+    }
+  },
+  {
+    "category": "INFORMÁTICA",
+    "product": "Galaxy Tab S8",
+    "price": 5939.1,
+    "quantity": 4,
+    "date": "02-01-2022",
+    "client": {
+      "name": "BIA",
+      "email": "bianca@hotmail.com",
+      "address": {
+        "street": "Rua Biancaneira",
+        "number": 781,
+        "complement": "nenhum"
+      }
+    }
+  }
+]

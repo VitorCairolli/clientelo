@@ -1,5 +1,6 @@
 package br.com.alura.clientelo.models;
 
+import br.com.alura.clientelo.converters.tools.BigDecimal2JsonDeserializer;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
@@ -17,6 +18,7 @@ public class Order {
     private String category;
     private String product;
     private Client client;
+    @JsonDeserialize(using = BigDecimal2JsonDeserializer.class)
     private BigDecimal price;
     private int quantity;
 

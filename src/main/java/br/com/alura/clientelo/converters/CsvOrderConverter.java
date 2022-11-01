@@ -37,7 +37,7 @@ public class CsvOrderConverter {
                 String produto = registro[1];
                 BigDecimal preco = new BigDecimal(registro[2]);
                 int quantidade = Integer.parseInt(registro[3]);
-                LocalDate data = LocalDate.parse(registro[4], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                LocalDate data = LocalDate.parse(registro[4], DateTimeFormatter.ofPattern("dd-MM-yyyy"));
                 String clientName = registro[5];
                 String clientEmail = registro[6];
                 String clientAddressStreet = registro[7];
