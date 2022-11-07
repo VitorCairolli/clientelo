@@ -11,6 +11,9 @@ import br.com.alura.clientelo.reports.TopThreeOrdersByQuantityReport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.*;
@@ -28,6 +31,13 @@ public class Main {
         reportController.logReport(new OrderCategoryReport());
         reportController.logReport(new MostValuableByOrderCategoryReport());
         reportController.logReport(new DefaultReport());
+
+        EntityManagerFactory a = Persistence.createEntityManagerFactory("clientelo");
+        EntityManager em = a.createEntityManager();
+
+        em.getTransaction().begin();
+        em.persist(orders.get(0));
+        em.getTransaction().commit();
     }
 }
 

@@ -13,19 +13,18 @@ import java.util.Objects;
 @Table(name = "orders")
 public class Order {
     @Id
-    @Column(name = "id")
+    @GeneratedValue
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id")
     private Category category;
 
     @Column(name = "product", nullable = false)
     private String product;
 
-    @ManyToOne
-    @Column(name = "client", nullable = false)
-    @JoinColumn(name = "id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "client_id")
     private Client client;
 
     @Column(name = "price", nullable = false)
@@ -35,8 +34,7 @@ public class Order {
     @Column(name = "quantity", nullable = false)
     private int quantity;
 
-    @Column(name = "date", nullable = false)
-    @Temporal(TemporalType.DATE)
+    @Column(name = "create_date", nullable = false)
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     private LocalDate date;
 

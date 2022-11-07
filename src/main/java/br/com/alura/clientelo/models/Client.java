@@ -8,11 +8,18 @@ import java.util.Objects;
 public class Client {
 
     @Id
-    @Column(name = "id")
+    @GeneratedValue
     private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "email")
     private String email;
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "number", column = @Column(name = "address_number")),
+            @AttributeOverride(name = "street", column = @Column(name = "address_street")),
+            @AttributeOverride(name = "complement", column = @Column(name = "address_complement")),
+    })
     private Address address;
     public Long getId() {
         return id;
