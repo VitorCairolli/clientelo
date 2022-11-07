@@ -1,6 +1,7 @@
 package br.com.alura.clientelo.converters;
 
 import br.com.alura.clientelo.models.Address;
+import br.com.alura.clientelo.models.Category;
 import br.com.alura.clientelo.models.Client;
 import br.com.alura.clientelo.models.Order;
 
@@ -33,7 +34,7 @@ public class CsvOrderConverter {
                 String linha = leitorDeLinhas.nextLine();
                 String[] registro = linha.split(",");
 
-                String categoria = registro[0];
+                Category categoria = new Category(registro[0]);
                 String produto = registro[1];
                 BigDecimal preco = new BigDecimal(registro[2]);
                 int quantidade = Integer.parseInt(registro[3]);

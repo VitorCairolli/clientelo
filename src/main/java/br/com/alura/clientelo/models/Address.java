@@ -1,7 +1,9 @@
 package br.com.alura.clientelo.models;
 
+import javax.persistence.Embeddable;
 import java.util.Objects;
 
+@Embeddable
 public class Address {
 
     private String street;

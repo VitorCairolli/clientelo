@@ -4,30 +4,53 @@ import br.com.alura.clientelo.converters.tools.BigDecimal2JsonDeserializer;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Entity
+@Table(name = "orders")
 public class Order {
+    @Id
+    @Column(name = "id")
+    private Long id;
 
-    private String category;
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private Category category;
+
+    @Column(name = "product", nullable = false)
     private String product;
+
+    @ManyToOne
+    @Column(name = "client", nullable = false)
+    @JoinColumn(name = "id")
     private Client client;
+
+    @Column(name = "price", nullable = false)
     @JsonDeserialize(using = BigDecimal2JsonDeserializer.class)
     private BigDecimal price;
+
+    @Column(name = "quantity", nullable = false)
     private int quantity;
 
+    @Column(name = "date", nullable = false)
+    @Temporal(TemporalType.DATE)
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     private LocalDate date;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     Order(){};
 
-    public Order(String category, String product, Client client, BigDecimal price, int quantity, LocalDate date) {
+    public Order(Category category, String product, Client client, BigDecimal price, int quantity, LocalDate date) {
         this.category = category;
         this.product = product;
         this.client = client;
@@ -36,7 +59,7 @@ public class Order {
         this.date = date;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 

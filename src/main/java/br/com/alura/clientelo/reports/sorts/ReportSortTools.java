@@ -1,5 +1,6 @@
 package br.com.alura.clientelo.reports.sorts;
 
+import br.com.alura.clientelo.models.Category;
 import br.com.alura.clientelo.models.Order;
 
 import java.util.*;
@@ -11,17 +12,17 @@ public class ReportSortTools {
 
         orders.stream().sorted(Comparator.comparing(Order::getCategory))
                 .forEach(order -> {
-                    if(categorySummaryMap.containsKey(order.getCategory()))
-                        categorySummaryMap.get(order.getCategory()).addOrderValues(order);
+                    if(categorySummaryMap.containsKey(order.getCategory().getName()))
+                        categorySummaryMap.get(order.getCategory().getName()).addOrderValues(order);
                     else
-                        categorySummaryMap.put(order.getCategory(), new CategorySummary(order));
+                        categorySummaryMap.put(order.getCategory().getName(), new CategorySummary(order));
                 });
         return categorySummaryMap;
     }
 
     public static Map<String, Order> mostValuableOrderPerCategoryMap(List<Order> orders){
         List<String> categories = orders.stream()
-                .map(order -> order.getCategory())
+                .map(order -> order.getCategory().getName())
                 .distinct()
                 .sorted()
                 .toList();
@@ -30,7 +31,7 @@ public class ReportSortTools {
 
         categories.forEach(category -> {
             List<Order> orderedOrderOfCategory = orders.stream()
-                    .filter(order -> order.getCategory().equals(category))
+                    .filter(order -> order.getCategory().getName().equals(category))
                     .sorted(Comparator.comparing(Order::getTotalPrice).reversed())
                     .toList();
 

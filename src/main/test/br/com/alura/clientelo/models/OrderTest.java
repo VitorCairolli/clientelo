@@ -19,7 +19,7 @@ public class OrderTest {
     @BeforeEach
     void setup(){
 
-        subject = new Order("Livros",
+        subject = new Order(new Category("Livros"),
                 "O Hobbit",
                 new Client("Cairolli", "vsc@email.com",
                         new Address("Rua do chá", "47", "Do lado da maior pedra")),
@@ -27,7 +27,7 @@ public class OrderTest {
                 3,
                 LocalDate.parse("07/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-        moreExpansiveOrder = new Order("Livros",
+        moreExpansiveOrder = new Order(new Category("Livros"),
                 "A Sociedade do Anel",
                 new Client("Cairolli", "vsc@email.com",
                         new Address("Rua do chá", "47", "Do lado da maior pedra")),
@@ -35,7 +35,7 @@ public class OrderTest {
                 3,
                 LocalDate.parse("07/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-        lessExpansiveOrder = new Order("Livros",
+        lessExpansiveOrder = new Order(new Category("Livros"),
                 "As Duas Torres",
                 new Client("Cairolli", "vsc@email.com",
                         new Address("Rua do chá", "47", "Do lado da maior pedra")),

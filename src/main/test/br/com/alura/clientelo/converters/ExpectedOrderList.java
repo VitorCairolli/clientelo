@@ -1,6 +1,7 @@
 package br.com.alura.clientelo.converters;
 
 import br.com.alura.clientelo.models.Address;
+import br.com.alura.clientelo.models.Category;
 import br.com.alura.clientelo.models.Client;
 import br.com.alura.clientelo.models.Order;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,7 +21,7 @@ public class ExpectedOrderList {
         expectedOrders = new ArrayList<>();
 
         expectedOrders.add(
-                new Order("INFORMÁTICA",
+                new Order(new Category("INFORMÁTICA"),
                         "Notebook Samsung",
                         new Client("ANA",
                                 "anaAgiota@gmail.com",
@@ -33,7 +34,7 @@ public class ExpectedOrderList {
 
         );
         expectedOrders.add(
-                new Order("MÓVEIS",
+                new Order(new Category("MÓVEIS"),
                         "Sofá 3 lugares",
                         new Client("ANA",
                                 "anaAgiota@gmail.com",
@@ -45,7 +46,7 @@ public class ExpectedOrderList {
                         LocalDate.parse("05-01-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")))
         );
         expectedOrders.add(
-                new Order("LIVROS",
+                new Order(new Category("LIVROS"),
                         "Clean Architecture",
                         new Client("ANA",
                                 "anaAgiota@gmail.com",
@@ -57,7 +58,7 @@ public class ExpectedOrderList {
                         LocalDate.parse("08-01-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")))
         );
         expectedOrders.add(
-                new Order("MÓVEIS",
+                new Order(new Category("MÓVEIS"),
                         "Mesa de jantar 6 lugares",
                         new Client("ELI",
                                 "ELIminadoraDeBobos@gmail.com",
@@ -69,7 +70,7 @@ public class ExpectedOrderList {
                         LocalDate.parse("06-01-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")))
         );
         expectedOrders.add(
-                new Order("CELULARES",
+                new Order(new Category("CELULARES"),
                         "iPhone 13 Pro",
                         new Client("ANA",
                                 "anaAgiota@gmail.com",
@@ -81,7 +82,7 @@ public class ExpectedOrderList {
                         LocalDate.parse("13-01-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")))
         );
         expectedOrders.add(
-                new Order("INFORMÁTICA",
+                new Order(new Category("INFORMÁTICA"),
                         "Monitor Dell 27",
                         new Client("DANI",
                                 "danista@gmail.com",
@@ -93,7 +94,7 @@ public class ExpectedOrderList {
                         LocalDate.parse("04-01-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")))
         );
         expectedOrders.add(
-                new Order("LIVROS",
+                new Order(new Category("LIVROS"),
                         "Implementing Domain-Driven Design",
                         new Client("GABI",
                                 "gabinete@gmail.com",
@@ -105,7 +106,7 @@ public class ExpectedOrderList {
                         LocalDate.parse("10-01-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")))
         );
         expectedOrders.add(
-                new Order("AUTOMOTIVA",
+                new Order(new Category("AUTOMOTIVA"),
                         "Jogo de pneus",
                         new Client("BIA",
                                 "bianca@hotmail.com",
@@ -117,7 +118,7 @@ public class ExpectedOrderList {
                         LocalDate.parse("15-01-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")))
         );
         expectedOrders.add(
-                new Order("LIVROS",
+                new Order(new Category("LIVROS"),
                         "Clean Code",
                         new Client("BIA",
                                 "bianca@hotmail.com",
@@ -129,7 +130,7 @@ public class ExpectedOrderList {
                         LocalDate.parse("09-01-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")))
         );
         expectedOrders.add(
-                new Order("CELULARES",
+                new Order(new Category("CELULARES"),
                         "Galaxy S22 Ultra",
                         new Client("DANI",
                                 "danista@gmail.com",
@@ -141,7 +142,7 @@ public class ExpectedOrderList {
                         LocalDate.parse("14-01-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")))
         );
         expectedOrders.add(
-                new Order("INFORMÁTICA",
+                new Order(new Category("INFORMÁTICA"),
                         "Macbook Pro 16",
                         new Client("CAIO",
                                 "caioNoBait@gmail.com",
@@ -153,7 +154,7 @@ public class ExpectedOrderList {
                         LocalDate.parse("03-01-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")))
         );
         expectedOrders.add(
-                new Order("LIVROS",
+                new Order(new Category("LIVROS"),
                         "Refactoring Improving the Design of Existing Code",
                         new Client("DANI",
                                 "danista@gmail.com",
@@ -165,7 +166,7 @@ public class ExpectedOrderList {
                         LocalDate.parse("12-01-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")))
         );
         expectedOrders.add(
-                new Order("MÓVEIS",
+                new Order(new Category("MÓVEIS"),
                         "Cama queen size",
                         new Client("DANI",
                                 "danista@gmail.com",
@@ -177,7 +178,7 @@ public class ExpectedOrderList {
                         LocalDate.parse("07-01-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")))
         );
         expectedOrders.add(
-                new Order("AUTOMOTIVA",
+                new Order(new Category("AUTOMOTIVA"),
                         "Central multimidia",
                         new Client("CAIO",
                                 "caioNoBait@gmail.com",
@@ -189,7 +190,7 @@ public class ExpectedOrderList {
                         LocalDate.parse("16-01-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")))
         );
         expectedOrders.add(
-                new Order("LIVROS",
+                new Order(new Category("LIVROS"),
                         "Building Microservices",
                         new Client("CAIO",
                                 "caioNoBait@gmail.com",
@@ -201,7 +202,7 @@ public class ExpectedOrderList {
                         LocalDate.parse("11-01-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")))
         );
         expectedOrders.add(
-                new Order("INFORMÁTICA",
+                new Order(new Category("INFORMÁTICA"),
                         "Galaxy Tab S8",
                         new Client("BIA",
                                 "bianca@hotmail.com",

@@ -1,6 +1,7 @@
 package br.com.alura.clientelo.reports.sorts;
 
 import br.com.alura.clientelo.models.Address;
+import br.com.alura.clientelo.models.Category;
 import br.com.alura.clientelo.models.Client;
 import br.com.alura.clientelo.models.Order;
 import org.junit.Assert;
@@ -17,7 +18,7 @@ public class ReportSortToolsTest extends CsvProcessor {
     void returnTopThreeOrdersByQuantity() {
         List<Order> topThreeOrdersByQuantity = ReportSortTools.topThreeOrdersByQuantity(orders);
 
-        Order first = new Order("CELULARES",
+        Order first = new Order(new Category("CELULARES"),
                 "iPhone 13 Pro",
                 new Client("ANA",
                         "anaAgiota@gmail.com",
@@ -28,7 +29,7 @@ public class ReportSortToolsTest extends CsvProcessor {
                 6,
                 LocalDate.parse("13/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-        Order second = new Order("CELULARES",
+        Order second = new Order(new Category("CELULARES"),
                 "Galaxy S22 Ultra",
                 new Client("DANI",
                         "danista@gmail.com",
@@ -39,7 +40,7 @@ public class ReportSortToolsTest extends CsvProcessor {
                 5,
                 LocalDate.parse("14/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-        Order third = new Order("INFORMÁTICA",
+        Order third = new Order(new Category("INFORMÁTICA"),
                 "Galaxy Tab S8",
                 new Client("BIA",
                         "bianca@hotmail.com",
@@ -73,7 +74,7 @@ public class ReportSortToolsTest extends CsvProcessor {
     void returnMostValuablePerCategoryOrderedByCategory(){
         Map<String, Order> mostValuableMap= ReportSortTools.mostValuableOrderPerCategoryMap(orders);
 
-        Order first = new Order("AUTOMOTIVA",
+        Order first = new Order(new Category("AUTOMOTIVA"),
                 "Jogo de pneus",
                 new Client("BIA",
                         "bianca@hotmail.com",
@@ -84,7 +85,7 @@ public class ReportSortToolsTest extends CsvProcessor {
                 1,
                 LocalDate.parse("15/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-        Order second = new Order("CELULARES",
+        Order second = new Order(new Category("CELULARES"),
                 "iPhone 13 Pro",
                 new Client("ANA",
                         "anaAgiota@gmail.com",
@@ -95,7 +96,7 @@ public class ReportSortToolsTest extends CsvProcessor {
                 6,
                 LocalDate.parse("13/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-        Order third = new Order("INFORMÁTICA",
+        Order third = new Order(new Category("INFORMÁTICA"),
                 "Macbook Pro 16",
                 new Client("CAIO",
                         "caioNoBait@gmail.com",
@@ -106,7 +107,7 @@ public class ReportSortToolsTest extends CsvProcessor {
                 1,
                 LocalDate.parse("03/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-        Order fourth = new Order("LIVROS",
+        Order fourth = new Order(new Category("LIVROS"),
                 "Building Microservices",
                 new Client("CAIO",
                         "caioNoBait@gmail.com",
@@ -117,7 +118,7 @@ public class ReportSortToolsTest extends CsvProcessor {
                 2,
                 LocalDate.parse("11/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-        Order fifth = new Order("MÓVEIS",
+        Order fifth = new Order(new Category("MÓVEIS"),
                 "Cama queen size",
                 new Client("DANI",
                         "danista@gmail.com",

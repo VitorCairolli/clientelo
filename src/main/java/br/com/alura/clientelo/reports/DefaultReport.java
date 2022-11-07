@@ -47,7 +47,7 @@ public class DefaultReport implements Report{
 
             boolean jahProcessouCategoria = false;
             for (int j = 0; j < categoriasProcessadas.length; j++) {
-                if (pedidoAtual.getCategory().equalsIgnoreCase(categoriasProcessadas[j])) {
+                if (pedidoAtual.getCategory().getName().equalsIgnoreCase(categoriasProcessadas[j])) {
                     jahProcessouCategoria = true;
                 }
             }
@@ -60,7 +60,7 @@ public class DefaultReport implements Report{
                 } else {
                     for (int k = 0; k < categoriasProcessadas.length; k++) {
                         if (categoriasProcessadas[k] == null) {
-                            categoriasProcessadas[k] = pedidoAtual.getCategory();
+                            categoriasProcessadas[k] = pedidoAtual.getCategory().getName();
                             break;
                         }
                     }
