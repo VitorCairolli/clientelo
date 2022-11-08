@@ -29,27 +29,27 @@ public class ReportSortToolsTest extends CsvProcessor {
                 6,
                 LocalDate.parse("13/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-        Order second = new Order(new Category("CELULARES"),
-                "Galaxy S22 Ultra",
+        Order second = new Order(new Category("INFORMÁTICA"),
+                "Monitor Dell 27",
                 new Client("DANI",
                         "danista@gmail.com",
                         new Address("Rua DANIficada",
                                 "57",
                                 "nenhum")),
-                BigDecimal.valueOf(8549.10).setScale(2),
-                5,
-                LocalDate.parse("14/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                BigDecimal.valueOf(1889.00).setScale(2),
+                3,
+                LocalDate.parse("04-01-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
-        Order third = new Order(new Category("INFORMÁTICA"),
-                "Galaxy Tab S8",
-                new Client("BIA",
-                        "bianca@hotmail.com",
-                        new Address("Rua Biancaneira",
-                                "781",
+        Order third = new Order(new Category("LIVROS"),
+                "Implementing Domain-Driven Design",
+                new Client("GABI",
+                        "gabinete@gmail.com",
+                        new Address("Rua Casaco",
+                                "12",
                                 "nenhum")),
-                BigDecimal.valueOf(5939.10).setScale(2),
-                4,
-                LocalDate.parse("02/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                BigDecimal.valueOf(144.07).setScale(2),
+                3,
+                LocalDate.parse("10-01-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
         Assert.assertEquals(topThreeOrdersByQuantity.get(0), first);
         Assert.assertEquals(topThreeOrdersByQuantity.get(1), second);
@@ -108,51 +108,36 @@ public class ReportSortToolsTest extends CsvProcessor {
                 LocalDate.parse("03/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
         Order fourth = new Order(new Category("LIVROS"),
-                "Building Microservices",
-                new Client("CAIO",
-                        "caioNoBait@gmail.com",
-                        new Address("Rua Tetriz",
-                                "444",
-                                "Moro na casa do fundo")),
-                BigDecimal.valueOf(300.28).setScale(2),
-                2,
-                LocalDate.parse("11/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-
-        Order fifth = new Order(new Category("MÓVEIS"),
-                "Cama queen size",
-                new Client("DANI",
-                        "danista@gmail.com",
-                        new Address("Rua DANIficada",
-                                "57",
+                "Implementing Domain-Driven Design",
+                new Client("GABI",
+                        "gabinete@gmail.com",
+                        new Address("Rua Casaco",
+                                "12",
                                 "nenhum")),
-                BigDecimal.valueOf(3100.00).setScale(2),
-                2,
-                LocalDate.parse("07/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                BigDecimal.valueOf(144.07).setScale(2),
+                3,
+                LocalDate.parse("10-01-2022", DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 
         Assert.assertEquals(mostValuableMap.get("AUTOMOTIVA"), first);
         Assert.assertEquals(mostValuableMap.get("CELULARES"), second);
         Assert.assertEquals(mostValuableMap.get("INFORMÁTICA"), third);
         Assert.assertEquals(mostValuableMap.get("LIVROS"), fourth);
-        Assert.assertEquals(mostValuableMap.get("MÓVEIS"), fifth);
     }
     @Test
     void returnCategorySummaryMapOfEachCategoryOrderedByCategory(){
         Map<String, CategorySummary> categorySummaryMap = ReportSortTools.categoriesSummaryMap(orders);
 
         Assert.assertTrue(categorySummaryMap.containsKey("AUTOMOTIVA"));
-        Assert.assertEquals(BigDecimal.valueOf(1987.97).setScale(2), categorySummaryMap.get("AUTOMOTIVA").getPrice());
-        Assert.assertEquals(2, categorySummaryMap.get("AUTOMOTIVA").getQuantity());
+        Assert.assertEquals(BigDecimal.valueOf(1276.79).setScale(2), categorySummaryMap.get("AUTOMOTIVA").getPrice());
+        Assert.assertEquals(1, categorySummaryMap.get("AUTOMOTIVA").getQuantity());
         Assert.assertTrue(categorySummaryMap.containsKey("CELULARES"));
-        Assert.assertEquals(BigDecimal.valueOf(97801.50).setScale(2), categorySummaryMap.get("CELULARES").getPrice());
-        Assert.assertEquals(11, categorySummaryMap.get("CELULARES").getQuantity());
+        Assert.assertEquals(BigDecimal.valueOf(55056.00).setScale(2), categorySummaryMap.get("CELULARES").getPrice());
+        Assert.assertEquals(6, categorySummaryMap.get("CELULARES").getQuantity());
         Assert.assertTrue(categorySummaryMap.containsKey("INFORMÁTICA"));
-        Assert.assertEquals(BigDecimal.valueOf(64698.40).setScale(2), categorySummaryMap.get("INFORMÁTICA").getPrice());
-        Assert.assertEquals(9, categorySummaryMap.get("INFORMÁTICA").getQuantity());
+        Assert.assertEquals(BigDecimal.valueOf(37419.00).setScale(2), categorySummaryMap.get("INFORMÁTICA").getPrice());
+        Assert.assertEquals(4, categorySummaryMap.get("INFORMÁTICA").getQuantity());
         Assert.assertTrue(categorySummaryMap.containsKey("LIVROS"));
-        Assert.assertEquals(BigDecimal.valueOf(1507.64).setScale(2), categorySummaryMap.get("LIVROS").getPrice());
-        Assert.assertEquals(9, categorySummaryMap.get("LIVROS").getQuantity());
-        Assert.assertTrue(categorySummaryMap.containsKey("MÓVEIS"));
-        Assert.assertEquals(BigDecimal.valueOf(12378.98).setScale(2), categorySummaryMap.get("MÓVEIS").getPrice());
-        Assert.assertEquals(4, categorySummaryMap.get("MÓVEIS").getQuantity());
+        Assert.assertEquals(BigDecimal.valueOf(733.18).setScale(2), categorySummaryMap.get("LIVROS").getPrice());
+        Assert.assertEquals(6, categorySummaryMap.get("LIVROS").getQuantity());
     }
 }
