@@ -5,29 +5,29 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
+@Table(name = "productItem")
 public class ProductItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
+    @OneToOne(optional = false)
     private Product product;
 
-    @ManyToOne
-    @Column(name = "targetOrder")
-    private Order order;
+    @ManyToOne(optional = false)
+    private Order targetOrder;
 
     private int quantity;
 
-    @OneToMany
+    @ManyToOne
     private Discount discount;
 
     ProductItem(){}
 
     public ProductItem(Product product, Order order, int quantity, Discount discount) {
         this.product = product;
-        this.order = order;
+        this.targetOrder = order;
         this.quantity = quantity;
         this.discount = discount;
     }
@@ -49,11 +49,11 @@ public class ProductItem {
     }
 
     public Order getOrder() {
-        return order;
+        return targetOrder;
     }
 
     public void setOrder(Order order) {
-        this.order = order;
+        this.targetOrder = order;
     }
 
     public int getQuantity() {
@@ -100,6 +100,6 @@ public class ProductItem {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, product, order, quantity, discount);
+        return Objects.hash(id, product, targetOrder, quantity, discount);
     }
 }

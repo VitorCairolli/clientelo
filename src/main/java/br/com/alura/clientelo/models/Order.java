@@ -1,8 +1,6 @@
 package br.com.alura.clientelo.models;
 
-import br.com.alura.clientelo.converters.tools.BigDecimal2JsonDeserializer;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -19,7 +17,7 @@ public class Order {
     private Long id;
 
     @Column( nullable = false)
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "targetOrder", cascade = CascadeType.ALL)
     private List<ProductItem> productItems;
 
     @ManyToOne(cascade = CascadeType.ALL)

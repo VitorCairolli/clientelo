@@ -1,5 +1,7 @@
 package br.com.alura.clientelo.models;
 
+import br.com.alura.clientelo.converters.tools.BigDecimal2JsonDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
@@ -7,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
+@Table(name = "product")
 public class Product implements Comparable<Product>{
 
     @Id
@@ -15,6 +18,7 @@ public class Product implements Comparable<Product>{
 
     String name;
 
+    @JsonDeserialize(using = BigDecimal2JsonDeserializer.class)
     BigDecimal price;
 
     String description;
