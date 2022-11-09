@@ -19,10 +19,10 @@ public class MostValuableByOrderCategoryReport implements Report{
         Map<String, Order> mostValuableOrders = ReportSortTools.mostValuableOrderPerCategoryMap(orders);
 
         mostValuableOrders.forEach((category, order) -> {
-            report.add(OrderReportOutput.Builder
-                    .newInstance()
+            report.add(OrderReportOutput.Builder.newInstance()
+                    .setOrderId(order.getId())
                     .setCategory(category)
-                    .setProduct(order.getProduct())
+                    .setProductItem(order.getProductItems())
                     .setTotalPrice(order.getTotalPrice())
                     .build());
         });

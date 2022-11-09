@@ -7,32 +7,24 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "orders")
 public class Order {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id")
-    private Category category;
-
-    @Column(name = "product", nullable = false)
-    private String product;
+    @Column( nullable = false)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<ProductItem> productItems;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "client_id")
     private Client client;
-
-    @Column(name = "price", nullable = false)
-    @JsonDeserialize(using = BigDecimal2JsonDeserializer.class)
-    private BigDecimal price;
-
-    @Column(name = "quantity", nullable = false)
-    private int quantity;
 
     @Column(name = "create_date", nullable = false)
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
@@ -48,41 +40,62 @@ public class Order {
 
     Order(){};
 
-    public Order(Category category, String product, Client client, BigDecimal price, int quantity, LocalDate date) {
-        this.category = category;
-        this.product = product;
+    public Order(List<ProductItem> productItems, Client client, LocalDate date) {
+        this.productItems = productItems;
         this.client = client;
-        this.price = price;
-        this.quantity = quantity;
         this.date = date;
     }
 
-    public Category getCategory() {
-        return category;
+    public Order(ProductItem productItems, Client client, LocalDate date) {
+        this.productItems = new ArrayList<>();
+        this.productItems.add(productItems);
+        this.client = client;
+        this.date = date;
     }
 
-    public String getProduct() {
-        return product;
+    public List<ProductItem> getProductItems() {
+        return productItems;
+    }
+
+    public void setProductItems(List<ProductItem> productItems) {
+        this.productItems = productItems;
     }
 
     public Client getClient() {
         return client;
     }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public int getQuantity() {
-        return quantity;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public LocalDate getDate() {
         return date;
     }
-    
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
     public BigDecimal getTotalPrice(){
-        return price.multiply(BigDecimal.valueOf(quantity));
+        return productItems.stream()
+                .map(item -> item.getTotalPrice())
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    public int getTotalQuantity(){
+        return productItems.stream()
+                .map(item -> item.getQuantity())
+                .reduce(0, (subtotal, quantity) -> subtotal + quantity);
+    }
+
+    public boolean hasProductOfCategory(String category){
+        for(ProductItem productItem : productItems){
+            if(productItem.getProduct().getCategory().getName().equals(category))
+                return true;
+        }
+
+        return false;
     }
 
     public boolean isMoreExpensiveThan(Order otherOrder){
@@ -94,33 +107,25 @@ public class Order {
     }
 
     @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", productItems=" + productItems +
+                ", client=" + client +
+                ", date=" + date +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return quantity == order.quantity &&
-                Objects.equals(category, order.category) &&
-                Objects.equals(product, order.product) &&
-                Objects.equals(client, order.client) &&
-                Objects.equals(price, order.price) &&
-                Objects.equals(date, order.date);
+        return Objects.equals(id, order.id) && productItems.equals(order.productItems) && client.equals(order.client) && Objects.equals(date, order.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(category, product, client, price, quantity, date);
+        return Objects.hash(id, productItems, client, date);
     }
-
-    @Override
-    public String toString() {
-        return "Pedido{" +
-                "categoria='" + category + '\'' +
-                ", produto='" + product + '\'' +
-                ", cliente='" + client + '\'' +
-                ", preco=" + price +
-                ", quantidade=" + quantity +
-                ", data=" + date +
-                '}';
-    }
-
 }

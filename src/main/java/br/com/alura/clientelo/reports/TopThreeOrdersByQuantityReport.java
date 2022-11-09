@@ -24,8 +24,9 @@ public class TopThreeOrdersByQuantityReport implements Report{
         for (Order order : topThreeOrders) {
 
             report.add(OrderReportOutput.Builder.newInstance()
-                    .setProduct(order.getProduct())
-                    .setQuantity(BigDecimal.valueOf(order.getQuantity()))
+                    .setOrderId(order.getId())
+                    .setProductItem(order.getProductItems())
+                    .setQuantity(BigDecimal.valueOf(order.getTotalQuantity()))
                     .build());
         }
 

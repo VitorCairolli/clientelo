@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Client {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "name")
     private String name;
@@ -53,14 +53,12 @@ public class Client {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Client client = (Client) o;
-        return name.equals(client.name) &&
-                email.equals(client.email) &&
-                address.equals(client.address);
+        return Objects.equals(id, client.id) && name.equals(client.name) && email.equals(client.email) && address.equals(client.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, email, address);
+        return Objects.hash(id, name, email, address);
     }
 
     @Override

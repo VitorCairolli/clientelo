@@ -1,10 +1,8 @@
 package br.com.alura.clientelo.converters;
 
-import br.com.alura.clientelo.models.Address;
-import br.com.alura.clientelo.models.Category;
-import br.com.alura.clientelo.models.Client;
-import br.com.alura.clientelo.models.Order;
+import br.com.alura.clientelo.models.*;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URISyntaxException;
@@ -21,6 +19,9 @@ public class CsvOrderConverter {
     public static List<Order> convert(String fileName) {
         try {
             URL recursoCSV = ClassLoader.getSystemResource(fileName);
+
+            if(recursoCSV == null) throw new FileNotFoundException("File " + fileName + " nor found.");
+
             Path caminhoDoArquivo = Path.of(recursoCSV.toURI());
 
             Scanner leitorDeLinhas = new Scanner(caminhoDoArquivo);
@@ -35,7 +36,6 @@ public class CsvOrderConverter {
                 String[] registro = linha.split(",");
 
                 Category categoria = new Category(registro[0]);
-                String produto = registro[1];
                 BigDecimal preco = new BigDecimal(registro[2]);
                 int quantidade = Integer.parseInt(registro[3]);
                 LocalDate data = LocalDate.parse(registro[4], DateTimeFormatter.ofPattern("dd-MM-yyyy"));
@@ -44,6 +44,7 @@ public class CsvOrderConverter {
                 String clientAddressStreet = registro[7];
                 String clientAddressNumber = registro[8];
                 String clientAddressComplement = registro[9];
+                Product produto = new Product(registro[1], preco, "", quantidade, categoria);
 
                 Client client = new Client(clientName,
                         clientEmail,
@@ -51,7 +52,11 @@ public class CsvOrderConverter {
                                 clientAddressNumber,
                                 clientAddressComplement));
 
-                Order pedido = new Order(categoria, produto, client, preco, quantidade, data);
+                List<ProductItem> productItems = new ArrayList<>();
+                ProductItem productItem = new ProductItem(produto, null, quantidade, null);
+                Order pedido = new Order(productItems, client, data);
+                productItems.add(productItem);
+                productItem.setOrder(pedido);
                 pedidos.add(pedido);
 
                 i++;

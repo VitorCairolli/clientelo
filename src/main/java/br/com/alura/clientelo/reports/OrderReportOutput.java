@@ -1,24 +1,25 @@
 package br.com.alura.clientelo.reports;
 
+import br.com.alura.clientelo.models.ProductItem;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 public final class OrderReportOutput {
 
+    private Long order_id;
     private String category;
-    private String product;
+    private List<ProductItem> productItems;
     private String client;
-    private BigDecimal price;
-    private BigDecimal quantity;
     private BigDecimal totalPrice;
     private LocalDate date;
 
     public OrderReportOutput(Builder builder) {
+        this.order_id = builder.order_id;
         this.category = builder.category;
-        this.product = builder.product;
+        this.productItems = builder.productItems;
         this.client = builder.client;
-        this.price = builder.price;
-        this.quantity = builder.quantity;
         this.totalPrice = builder.totalPrice;
         this.date = builder.date;
     }
@@ -26,11 +27,10 @@ public final class OrderReportOutput {
     @Override
     public String toString() {
         String string = "";
-        if(product != null) string += "Name: " + product + "\n";
+        if(order_id != null) string += "OrderId: " + order_id + "\n";
+        if(productItems != null) string += "ProductItems: " + productItems + "\n";
         if(category != null) string += "Category: " + category + "\n";
         if(client != null) string += "Client: " + client + "\n";
-        if(price != null) string += "Price: " + price + "\n";
-        if(quantity != null) string += "Quantity: " + quantity + "\n";
         if(totalPrice != null) string += "Total_Price: " + totalPrice + "\n";
         if(date != null) string += "Date: " + date + "\n";
 
@@ -40,18 +40,24 @@ public final class OrderReportOutput {
 
     public static class Builder {
 
+        private Long order_id;
         private String category;
-        private String product;
+        private List<ProductItem> productItems;
         private String client;
         private BigDecimal price;
+
+        public Builder setOrderId(Long id) {
+            this.order_id = order_id;
+            return this;
+        }
 
         public Builder setCategory(String category) {
             this.category = category;
             return this;
         }
 
-        public Builder setProduct(String product) {
-            this.product = product;
+        public Builder setProductItem(List<ProductItem> productItems) {
+            this.productItems = productItems;
             return this;
         }
 

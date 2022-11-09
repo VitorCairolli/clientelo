@@ -35,7 +35,7 @@ public class Address {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Address address = (Address) o;
-        return Objects.equals(street, address.street) && Objects.equals(number, address.number) && Objects.equals(complement, address.complement);
+        return street.equals(address.street) && number.equals(address.number) && Objects.equals(complement, address.complement);
     }
 
     @Override

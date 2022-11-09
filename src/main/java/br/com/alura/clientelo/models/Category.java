@@ -7,7 +7,7 @@ import java.util.Objects;
 @Table(name = "category")
 public class Category implements Comparable<Category> {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "name", nullable = false)
@@ -31,6 +31,18 @@ public class Category implements Comparable<Category> {
         return name;
     }
 
+    public boolean isInactive() {
+        return inactive;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setInactive(boolean inactive) {
+        this.inactive = inactive;
+    }
+
     @Override
     public int compareTo(@org.jetbrains.annotations.NotNull Category comparedCategory) {
         return this.getName().compareTo(comparedCategory.getName());
@@ -47,5 +59,14 @@ public class Category implements Comparable<Category> {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, inactive);
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", inactive=" + inactive +
+                '}';
     }
 }

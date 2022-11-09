@@ -19,28 +19,34 @@ public class OrderTest {
     @BeforeEach
     void setup(){
 
-        subject = new Order(new Category("Livros"),
-                "O Hobbit",
-                new Client("Cairolli", "vsc@email.com",
-                        new Address("Rua do chá", "47", "Do lado da maior pedra")),
+        subject = new Order(new ProductItem(new Product("O Hobbit",
                 new BigDecimal(32.50).setScale(2),
+                "Smaug",50, new Category("Livros")),
+                null,
                 3,
-                LocalDate.parse("07/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-
-        moreExpansiveOrder = new Order(new Category("Livros"),
-                "A Sociedade do Anel",
+                null),
                 new Client("Cairolli", "vsc@email.com",
                         new Address("Rua do chá", "47", "Do lado da maior pedra")),
+                LocalDate.parse("07/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+        moreExpansiveOrder = new Order(new ProductItem(new Product("A Sociedade do Anel",
                 new BigDecimal(33.50).setScale(2),
+                "Gandalf",50, new Category("Livros")),
+                null,
                 3,
-                LocalDate.parse("07/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-
-        lessExpansiveOrder = new Order(new Category("Livros"),
-                "As Duas Torres",
+                null),
                 new Client("Cairolli", "vsc@email.com",
                         new Address("Rua do chá", "47", "Do lado da maior pedra")),
+                LocalDate.parse("07/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+        lessExpansiveOrder = new Order(new ProductItem(new Product("As Duas Torres",
                 new BigDecimal(31.50).setScale(2),
+                "Gandalf",50, new Category("Livros")),
+                null,
                 3,
+                null),
+                new Client("Cairolli", "vsc@email.com",
+                        new Address("Rua do chá", "47", "Do lado da maior pedra")),
                 LocalDate.parse("07/01/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
     }

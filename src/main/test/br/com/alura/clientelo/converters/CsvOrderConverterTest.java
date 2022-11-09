@@ -5,16 +5,22 @@ import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class CsvOrderConverterTest extends ExpectedOrderList {
+public class CsvOrderConverterTest{
 
     @Test
-    void convertShouldReturnListWithAllExpectedOrders() {
+    void convertShouldReturnListWithEightOrders() {
         List<Order> csvOrders = CsvOrderConverter.convert("test/orders.csv");
 
-        csvOrders.forEach(order -> Assert.assertTrue(expectedOrders.contains(order)));
+        Assert.assertEquals(csvOrders.size(), 7);
+    }
+
+    @Test
+    void convertShouldThrowFileNotFoundExceptionWhenFileNotFound(){
+        Assert.assertThrows(RuntimeException.class, () ->CsvOrderConverter.convert("test/orders.throw"));
     }
 }
