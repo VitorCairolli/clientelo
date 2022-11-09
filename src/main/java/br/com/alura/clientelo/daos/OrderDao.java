@@ -40,9 +40,9 @@ public class OrderDao {
         entityManager.getTransaction().commit();
     }
 
-    public void deleteById(Order order){
+    public void deleteById(Long id){
         entityManager.getTransaction().begin();
-        entityManager.remove(order);
+        entityManager.remove(findById(id));
         entityManager.getTransaction().commit();
     }
 }

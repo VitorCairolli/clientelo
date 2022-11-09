@@ -7,7 +7,7 @@ import java.util.Objects;
 @Table(name = "category")
 public class Category implements Comparable<Category> {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
 
     @Column(name = "name", nullable = false)

@@ -1,43 +1,43 @@
 package br.com.alura.clientelo.daos;
 
 import br.com.alura.clientelo.daos.util.EntityManagerCreator;
+import br.com.alura.clientelo.models.Client;
 import br.com.alura.clientelo.models.Order;
-import br.com.alura.clientelo.models.Product;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 
-public class ProductDao {
+public class ClientDao {
 
     EntityManager entityManager;
 
-    public ProductDao() {
+    public ClientDao() {
         this.entityManager = EntityManagerCreator.createEntityManager();
     }
 
-    public Product findById(long id){
-        return entityManager.find(Product.class, id);
+    public Client findById(long id){
+        return entityManager.find(Client.class, id);
     }
 
-    public List<Product> findAll(){
-        return entityManager.createQuery("from " + Product.class.getName()).getResultList();
+    public List<Client> findAll(){
+        return entityManager.createQuery("from " + Client.class.getName()).getResultList();
     }
 
-    public void create(Product product){
+    public void create(Client client){
         entityManager.getTransaction().begin();
-        entityManager.persist(product);
+        entityManager.persist(client);
         entityManager.getTransaction().commit();
     }
 
-    public void update(Product product){
+    public void update(Client client){
         entityManager.getTransaction().begin();
-        entityManager.merge(product);
+        entityManager.merge(client);
         entityManager.getTransaction().commit();
     }
 
-    public void delete(Product product){
+    public void delete(Client client){
         entityManager.getTransaction().begin();
-        entityManager.remove(product);
+        entityManager.remove(client);
         entityManager.getTransaction().commit();
     }
 
