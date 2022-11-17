@@ -2,6 +2,8 @@ package br.com.alura.clientelo.reports;
 
 import br.com.alura.clientelo.daos.OrderDao;
 import br.com.alura.clientelo.models.Order;
+import br.com.alura.clientelo.reports.output.OrderReportOutput;
+import br.com.alura.clientelo.reports.output.Output;
 import br.com.alura.clientelo.reports.sorts.ReportSortTools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +20,7 @@ public class OrderCategoryReport implements Report {
         OrderDao orderDao = new OrderDao();
         List<Order> orders = orderDao.findAll();
 
-        List<OrderReportOutput> report = new ArrayList<>();
+        List<Output> report = new ArrayList<>();
 
         ReportSortTools.categoriesSummaryMap(orders).forEach(((category, summary) -> {
                 report.add(OrderReportOutput.Builder.newInstance()

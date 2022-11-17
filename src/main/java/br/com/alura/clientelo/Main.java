@@ -6,6 +6,7 @@ import br.com.alura.clientelo.daos.ClientDao;
 import br.com.alura.clientelo.daos.OrderDao;
 import br.com.alura.clientelo.models.*;
 import br.com.alura.clientelo.reports.LoyalClientsReport;
+import br.com.alura.clientelo.reports.MostSoldProductsReport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,6 +27,8 @@ public class Main {
         ReportController reportController = new ReportController();
 
         reportController.logReport(new LoyalClientsReport());
+
+        reportController.logReport(new MostSoldProductsReport());
 //
 //        ClientDao clientDao = new ClientDao();
 //        clientDao.top3MostLoyalClientReport();

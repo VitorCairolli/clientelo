@@ -2,8 +2,7 @@ package br.com.alura.clientelo.daos;
 
 import br.com.alura.clientelo.daos.util.EntityManagerCreator;
 import br.com.alura.clientelo.models.Client;
-import br.com.alura.clientelo.models.Order;
-import br.com.alura.clientelo.vo.ClientTotalPriceAndOrders;
+import br.com.alura.clientelo.vo.ClientTotalPriceAndOrdersVO;
 
 import javax.persistence.EntityManager;
 import java.math.BigDecimal;
@@ -25,8 +24,8 @@ public class ClientDao {
         return entityManager.createQuery("from " + Client.class.getName()).getResultList();
     }
 
-    public List<ClientTotalPriceAndOrders> findLoyalClient(){
-        String query = "select new " + ClientTotalPriceAndOrders.class.getName() + " (c.name, sum(o.totalPrice), count(o.id)) from Client c join Order o on o.client = c group by c.id order by sum(o.totalPrice) desc";
+    public List<ClientTotalPriceAndOrdersVO> findLoyalClient(){
+        String query = "select new " + ClientTotalPriceAndOrdersVO.class.getName() + " (c.name, sum(o.totalPrice), count(o.id)) from Client c join Order o on o.client = c group by c.id order by sum(o.totalPrice) desc";
 
         return entityManager.createQuery(query).getResultList();
     }

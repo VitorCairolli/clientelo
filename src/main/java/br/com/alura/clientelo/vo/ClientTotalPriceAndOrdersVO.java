@@ -2,7 +2,7 @@ package br.com.alura.clientelo.vo;
 
 import java.math.BigDecimal;
 
-public class ClientTotalPriceAndOrders {
+public class ClientTotalPriceAndOrdersVO {
 
     private String name;
 
@@ -10,7 +10,7 @@ public class ClientTotalPriceAndOrders {
 
     private Long totalOrders;
 
-    public ClientTotalPriceAndOrders(String name, BigDecimal totalPrice, Long totalOrders) {
+    public ClientTotalPriceAndOrdersVO(String name, BigDecimal totalPrice, Long totalOrders) {
         this.name = name;
         this.totalPrice = totalPrice;
         this.totalOrders = totalOrders;

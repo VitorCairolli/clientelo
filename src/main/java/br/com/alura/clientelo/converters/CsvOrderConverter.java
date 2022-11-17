@@ -44,7 +44,7 @@ public class CsvOrderConverter {
                 String clientAddressStreet = registro[7];
                 String clientAddressNumber = registro[8];
                 String clientAddressComplement = registro[9];
-                Product produto = new Product(registro[1], preco, "", quantidade, categoria);
+                Product produto = new Product(registro[1], preco, "", quantidade + 1, categoria);
 
                 Client client = new Client(clientName,
                         clientEmail,

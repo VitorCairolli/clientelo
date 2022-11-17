@@ -2,13 +2,14 @@ package br.com.alura.clientelo.reports;
 
 import br.com.alura.clientelo.daos.OrderDao;
 import br.com.alura.clientelo.models.Order;
+import br.com.alura.clientelo.reports.output.OrderReportOutput;
+import br.com.alura.clientelo.reports.output.Output;
 import br.com.alura.clientelo.reports.sorts.ReportSortTools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class TopThreeOrdersByQuantityReport implements Report{
@@ -21,7 +22,7 @@ public class TopThreeOrdersByQuantityReport implements Report{
         OrderDao orderDao = new OrderDao();
         List<Order> orders = orderDao.findAll();
 
-        List<OrderReportOutput> report = new ArrayList<>();
+        List<Output> report = new ArrayList<>();
 
         List<Order> topThreeOrders = ReportSortTools.topThreeOrdersByQuantity(orders);
 

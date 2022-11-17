@@ -2,13 +2,13 @@ package br.com.alura.clientelo.reports;
 
 import br.com.alura.clientelo.daos.OrderDao;
 import br.com.alura.clientelo.models.Order;
+import br.com.alura.clientelo.reports.output.OrderReportOutput;
+import br.com.alura.clientelo.reports.output.Output;
 import br.com.alura.clientelo.reports.sorts.ReportSortTools;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiConsumer;
 
 public class MostValuableByOrderCategoryReport implements Report{
 
@@ -18,7 +18,7 @@ public class MostValuableByOrderCategoryReport implements Report{
         OrderDao orderDao = new OrderDao();
         List<Order> orders = orderDao.findAll();
 
-        List<OrderReportOutput> report = new ArrayList<>();
+        List<Output> report = new ArrayList<>();
 
         Map<String, Order> mostValuableOrders = ReportSortTools.mostValuableOrderPerCategoryMap(orders);
 

@@ -1,4 +1,4 @@
-package br.com.alura.clientelo.reports;
+package br.com.alura.clientelo.reports.output;
 
 import br.com.alura.clientelo.models.ProductItem;
 
@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-public final class OrderReportOutput {
+public final class OrderReportOutput implements Output{
 
     private Long order_id;
     private String category;

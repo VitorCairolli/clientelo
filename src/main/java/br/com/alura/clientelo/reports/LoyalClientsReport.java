@@ -1,7 +1,9 @@
 package br.com.alura.clientelo.reports;
 
 import br.com.alura.clientelo.daos.ClientDao;
-import br.com.alura.clientelo.vo.ClientTotalPriceAndOrders;
+import br.com.alura.clientelo.reports.output.OrderReportOutput;
+import br.com.alura.clientelo.reports.output.Output;
+import br.com.alura.clientelo.vo.ClientTotalPriceAndOrdersVO;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -11,9 +13,9 @@ public class LoyalClientsReport implements Report{
     @Override
     public void logReport() {
         ClientDao clientDao = new ClientDao();
-        List<ClientTotalPriceAndOrders> loyalClients = clientDao.findLoyalClient();
+        List<ClientTotalPriceAndOrdersVO> loyalClients = clientDao.findLoyalClient();
 
-        List<OrderReportOutput> report = new ArrayList<>();
+        List<Output> report = new ArrayList<>();
 
         loyalClients.subList(0,3).forEach(client -> {
             report.add(OrderReportOutput.Builder.newInstance()
