@@ -14,6 +14,7 @@ public final class OrderReportOutput {
     private String client;
     private BigDecimal totalPrice;
     private LocalDate date;
+    private BigDecimal quantity;
 
     public OrderReportOutput(Builder builder) {
         this.order_id = builder.order_id;
@@ -22,6 +23,7 @@ public final class OrderReportOutput {
         this.client = builder.client;
         this.totalPrice = builder.totalPrice;
         this.date = builder.date;
+        this.quantity = builder.quantity;
     }
 
     @Override
@@ -31,6 +33,7 @@ public final class OrderReportOutput {
         if(productItems != null) string += "ProductItems: " + productItems + "\n";
         if(category != null) string += "Category: " + category + "\n";
         if(client != null) string += "Client: " + client + "\n";
+        if(quantity != null) string += "Quantity " + quantity + "\n";
         if(totalPrice != null) string += "Total_Price: " + totalPrice + "\n";
         if(date != null) string += "Date: " + date + "\n";
 
@@ -44,7 +47,9 @@ public final class OrderReportOutput {
         private String category;
         private List<ProductItem> productItems;
         private String client;
-        private BigDecimal price;
+        private BigDecimal quantity;
+        private BigDecimal totalPrice;
+        private LocalDate date;
 
         public Builder setOrderId(Long id) {
             this.order_id = order_id;
@@ -66,11 +71,6 @@ public final class OrderReportOutput {
             return this;
         }
 
-        public Builder setPrice(BigDecimal price) {
-            this.price = price;
-            return this;
-        }
-
         public Builder setQuantity(BigDecimal quantity) {
             this.quantity = quantity;
             return this;
@@ -85,10 +85,6 @@ public final class OrderReportOutput {
             this.date = date;
             return this;
         }
-
-        private BigDecimal quantity;
-        private BigDecimal totalPrice;
-        private LocalDate date;
 
         public static Builder newInstance(){
             return new Builder();

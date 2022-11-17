@@ -3,9 +3,11 @@ package br.com.alura.clientelo.daos;
 import br.com.alura.clientelo.daos.util.EntityManagerCreator;
 import br.com.alura.clientelo.models.Client;
 import br.com.alura.clientelo.models.Order;
+import br.com.alura.clientelo.vo.ClientTotalPriceAndOrders;
 
 import javax.persistence.EntityManager;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.*;
 
 public class ClientDao {
 
@@ -21,6 +23,12 @@ public class ClientDao {
 
     public List<Client> findAll(){
         return entityManager.createQuery("from " + Client.class.getName()).getResultList();
+    }
+
+    public List<ClientTotalPriceAndOrders> findLoyalClient(){
+        String query = "select new " + ClientTotalPriceAndOrders.class.getName() + " (c.name, sum(o.totalPrice), count(o.id)) from Client c join Order o on o.client = c group by c.id order by sum(o.totalPrice) desc";
+
+        return entityManager.createQuery(query).getResultList();
     }
 
     public void create(Client client){
@@ -45,5 +53,23 @@ public class ClientDao {
         entityManager.getTransaction().begin();
         entityManager.remove(findById(id));
         entityManager.getTransaction().commit();
+    }
+
+    public void top3MostLoyalClientReport(){
+        List<Client> clients = findAll();
+        OrderDao orderDao = new OrderDao();
+        Map<Client, BigDecimal> clientsOrders = new HashMap<>();
+
+//        clients.forEach(client -> {
+//            orderDao.findAllByClient(client)
+//                    .stream()
+//                    .reduce(BigDecimal.ZERO, (subtotal, order) ->
+//                            order.getProductItems()
+//                                    .stream()
+//                                    .reduce(BigDecimal.ZERO, (totalOrderPrice, productItem) ->
+//                                            productItem.getTotalPrice()
+//                                    )
+//                    );
+//        });
     }
 }

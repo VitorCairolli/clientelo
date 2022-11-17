@@ -54,8 +54,8 @@ public class CsvOrderConverter {
 
                 List<ProductItem> productItems = new ArrayList<>();
                 ProductItem productItem = new ProductItem(produto, null, quantidade, null);
-                Order pedido = new Order(productItems, client, data);
                 productItems.add(productItem);
+                Order pedido = new Order(productItems, client, data);
                 productItem.setOrder(pedido);
                 pedidos.add(pedido);
 

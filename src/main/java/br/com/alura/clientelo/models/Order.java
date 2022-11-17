@@ -1,6 +1,8 @@
 package br.com.alura.clientelo.models;
 
+import br.com.alura.clientelo.converters.tools.BigDecimal2JsonDeserializer;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -20,13 +22,17 @@ public class Order {
     @OneToMany(mappedBy = "targetOrder", cascade = CascadeType.ALL)
     private List<ProductItem> productItems;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "client_id")
     private Client client;
 
     @Column(name = "create_date", nullable = false)
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     private LocalDate date;
+
+    @Column(nullable = false)
+    @JsonDeserialize(using = BigDecimal2JsonDeserializer.class)
+    private BigDecimal totalPrice;
 
     public Long getId() {
         return id;
@@ -42,6 +48,10 @@ public class Order {
         this.productItems = productItems;
         this.client = client;
         this.date = date;
+        this.totalPrice = productItems.stream()
+                .map(item -> item.getTotalPrice())
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
     }
 
     public Order(ProductItem productItems, Client client, LocalDate date) {
@@ -49,6 +59,7 @@ public class Order {
         this.productItems.add(productItems);
         this.client = client;
         this.date = date;
+        this.totalPrice = productItems.getTotalPrice();
     }
 
     public List<ProductItem> getProductItems() {
@@ -76,9 +87,7 @@ public class Order {
     }
 
     public BigDecimal getTotalPrice(){
-        return productItems.stream()
-                .map(item -> item.getTotalPrice())
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        return totalPrice;
     }
 
     public int getTotalQuantity(){

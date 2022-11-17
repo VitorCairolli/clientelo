@@ -12,7 +12,7 @@ public class ProductItem {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private Product product;
 
     @ManyToOne(optional = false)

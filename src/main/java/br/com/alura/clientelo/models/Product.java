@@ -25,7 +25,7 @@ public class Product implements Comparable<Product>{
 
     int quantityInStock;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     Category category;
 
