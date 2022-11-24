@@ -13,7 +13,8 @@ public class LoyalClientsReport implements Report{
     @Override
     public void logReport() {
         ClientDao clientDao = new ClientDao();
-        List<ClientTotalPriceAndOrdersVO> loyalClients = clientDao.findLoyalClient();
+
+        List<ClientTotalPriceAndOrdersVO> loyalClients = clientDao.findByMostExpended();
 
         List<Output> report = new ArrayList<>();
 

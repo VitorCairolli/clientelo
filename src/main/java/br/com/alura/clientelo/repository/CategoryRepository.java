@@ -1,4 +1,4 @@
-package br.com.alura.clientelo.daos;
+package br.com.alura.clientelo.repository;
 
 import br.com.alura.clientelo.models.Category;
 

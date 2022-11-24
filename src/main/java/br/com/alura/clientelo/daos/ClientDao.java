@@ -2,11 +2,11 @@ package br.com.alura.clientelo.daos;
 
 import br.com.alura.clientelo.daos.util.EntityManagerCreator;
 import br.com.alura.clientelo.models.Client;
+import br.com.alura.clientelo.models.Order;
 import br.com.alura.clientelo.vo.ClientTotalPriceAndOrdersVO;
 
 import javax.persistence.EntityManager;
-import java.math.BigDecimal;
-import java.util.*;
+import java.util.List;
 
 public class ClientDao {
 
@@ -24,8 +24,12 @@ public class ClientDao {
         return entityManager.createQuery("from " + Client.class.getName()).getResultList();
     }
 
-    public List<ClientTotalPriceAndOrdersVO> findLoyalClient(){
-        String query = "select new " + ClientTotalPriceAndOrdersVO.class.getName() + " (c.name, sum(o.totalPrice), count(o.id)) from Client c join Order o on o.client = c group by c.id order by sum(o.totalPrice) desc";
+    public List<Client> findAllWithFetchLazy(){
+        return entityManager.createQuery("from " + Client.class.getName() + " o JOIN FETCH o.client_id").getResultList();
+    }
+
+    public List<ClientTotalPriceAndOrdersVO> findByMostExpended(){
+        String query = "select new br.com.alura.clientelo.vo.ClientTotalPriceAndOrdersVO (c.name, sum(o.totalPrice), count(o.id)) from Client c join Order o on o.client = c group by c.id order by sum(o.totalPrice) desc";
 
         return entityManager.createQuery(query).getResultList();
     }
@@ -33,6 +37,12 @@ public class ClientDao {
     public void create(Client client){
         entityManager.getTransaction().begin();
         entityManager.persist(client);
+        entityManager.getTransaction().commit();
+    }
+
+    public void createAll(List<Client> clients){
+        entityManager.getTransaction().begin();
+        clients.forEach(client -> entityManager.persist(client));
         entityManager.getTransaction().commit();
     }
 
@@ -52,23 +62,5 @@ public class ClientDao {
         entityManager.getTransaction().begin();
         entityManager.remove(findById(id));
         entityManager.getTransaction().commit();
-    }
-
-    public void top3MostLoyalClientReport(){
-        List<Client> clients = findAll();
-        OrderDao orderDao = new OrderDao();
-        Map<Client, BigDecimal> clientsOrders = new HashMap<>();
-
-//        clients.forEach(client -> {
-//            orderDao.findAllByClient(client)
-//                    .stream()
-//                    .reduce(BigDecimal.ZERO, (subtotal, order) ->
-//                            order.getProductItems()
-//                                    .stream()
-//                                    .reduce(BigDecimal.ZERO, (totalOrderPrice, productItem) ->
-//                                            productItem.getTotalPrice()
-//                                    )
-//                    );
-//        });
     }
 }
