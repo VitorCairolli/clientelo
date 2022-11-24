@@ -23,6 +23,7 @@ public class Product implements Comparable<Product>{
 
     String description;
 
+    @Column(name = "quantity_in_stock", nullable = false)
     int quantityInStock;
 
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)

@@ -18,6 +18,7 @@ public class ProductItem {
     @ManyToOne(optional = false)
     private Order targetOrder;
 
+    @Column(nullable = false)
     private int quantity;
 
     @ManyToOne

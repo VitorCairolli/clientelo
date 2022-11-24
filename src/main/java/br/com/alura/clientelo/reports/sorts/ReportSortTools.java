@@ -1,6 +1,5 @@
 package br.com.alura.clientelo.reports.sorts;
 
-import br.com.alura.clientelo.models.Category;
 import br.com.alura.clientelo.models.Order;
 import br.com.alura.clientelo.models.ProductItem;
 

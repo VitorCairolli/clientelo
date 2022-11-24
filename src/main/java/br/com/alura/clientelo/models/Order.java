@@ -30,7 +30,7 @@ public class Order {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
     private LocalDate date;
 
-    @Column(nullable = false)
+    @Column(name = "total_price", nullable = false)
     @JsonDeserialize(using = BigDecimal2JsonDeserializer.class)
     private BigDecimal totalPrice;
 
