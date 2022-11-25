@@ -20,7 +20,7 @@ public final class ProductReportOutput implements Output {
         this.name = builder.name;
         this.quantityInStock = builder.quantityInStock;
         this.description = builder.description;
-        this.timesSold = builder.timeSold;
+        this.timesSold = builder.timesSold;
     }
 
     @Override
@@ -45,10 +45,10 @@ public final class ProductReportOutput implements Output {
         private String name;
         private BigDecimal quantityInStock;
         private String description;
-        private Long timeSold;
+        private Long timesSold;
 
-        public Builder setTimeSold(Long timeSold) {
-            this.timeSold = timeSold;
+        public Builder setTimesSold(Long timesSold) {
+            this.timesSold = timesSold;
             return this;
         }
 

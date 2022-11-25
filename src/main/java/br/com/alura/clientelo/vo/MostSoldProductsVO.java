@@ -10,7 +10,7 @@ public class MostSoldProductsVO {
 
     private final BigDecimal price;
 
-    private final long timeSold;
+    private final long timesSold;
 
     private final int quantityInStock;
 
@@ -20,7 +20,7 @@ public class MostSoldProductsVO {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.timeSold = timeSold;
+        this.timesSold = timeSold;
         this.quantityInStock = quantityInStock;
         this.description = description;
     }
@@ -41,8 +41,8 @@ public class MostSoldProductsVO {
         return price;
     }
 
-    public Long getTimeSold() {
-        return timeSold;
+    public Long getTimesSold() {
+        return timesSold;
     }
 
     public Integer getQuantityInStock() {

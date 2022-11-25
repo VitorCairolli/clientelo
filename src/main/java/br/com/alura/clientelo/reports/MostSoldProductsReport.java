@@ -1,7 +1,6 @@
 package br.com.alura.clientelo.reports;
 
 import br.com.alura.clientelo.daos.ProductDao;
-import br.com.alura.clientelo.reports.output.OrderReportOutput;
 import br.com.alura.clientelo.reports.output.Output;
 import br.com.alura.clientelo.reports.output.ProductReportOutput;
 import br.com.alura.clientelo.vo.MostSoldProductsVO;
@@ -18,7 +17,7 @@ public class MostSoldProductsReport implements Report{
 
         List<Output> report = new ArrayList<>();
 
-        mostSoldProducts = mostSoldProducts.stream().filter(mostSoldProductVO -> mostSoldProductVO.getTimeSold().compareTo(3L) >= 0).toList();
+        mostSoldProducts = mostSoldProducts.stream().filter(mostSoldProductVO -> mostSoldProductVO.getTimesSold().compareTo(3L) >= 0).toList();
 
         mostSoldProducts.forEach(productVO -> {
             report.add(ProductReportOutput.Builder.newInstance()
@@ -26,7 +25,7 @@ public class MostSoldProductsReport implements Report{
                     .setName(productVO.getName())
                     .setQuantityInStock(BigDecimal.valueOf(productVO.getQuantityInStock()))
                     .setPrice(productVO.getPrice())
-                    .setTimeSold(productVO.getTimeSold())
+                    .setTimesSold(productVO.getTimesSold())
                     .setDescription(productVO.getDescription())
                     .build());
         });
