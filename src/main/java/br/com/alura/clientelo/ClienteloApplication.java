@@ -8,6 +8,7 @@ import br.com.alura.clientelo.models.*;
 import br.com.alura.clientelo.reports.LoyalClientsReport;
 import br.com.alura.clientelo.reports.MostSoldProductsReport;
 import br.com.alura.clientelo.repository.ClientRepository;
+import br.com.alura.clientelo.repository.OrderRepository;
 import br.com.alura.clientelo.repository.ProductRepository;
 import br.com.alura.clientelo.vo.MostSoldProductsVO;
 import org.springframework.boot.CommandLineRunner;
@@ -23,11 +24,13 @@ public class ClienteloApplication implements CommandLineRunner {
     private final CategoryRepository categoryRepository;
     private final ClientRepository clientRepository;
     private final ProductRepository productRepository;
+    private final OrderRepository orderRepository;
 
-    public ClienteloApplication(CategoryRepository categoryRepository, ClientRepository clientRepository, ProductRepository productRepository){
+    public ClienteloApplication(CategoryRepository categoryRepository, ClientRepository clientRepository, ProductRepository productRepository, OrderRepository orderRepository){
         this.categoryRepository = categoryRepository;
         this.clientRepository = clientRepository;
         this.productRepository = productRepository;
+        this.orderRepository = orderRepository;
     }
 
     public static void main(String[] args) throws IOException, URISyntaxException {
@@ -52,6 +55,8 @@ public class ClienteloApplication implements CommandLineRunner {
         System.out.println("Clients order by expenses: " + clientRepository.findOrderedByMostExpended());
         System.out.println("All products: " + productRepository.findAll());
         System.out.println("Products ordered by most sold: " + productRepository.findOrderedByMostSoldProducts());
+        System.out.println("All orders: " + orderRepository.findAll());
+        System.out.println("Orders by client: " + orderRepository.findByClient(orders.get(0).getClient()));
     }
 }
 
