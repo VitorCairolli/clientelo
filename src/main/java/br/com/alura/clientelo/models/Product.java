@@ -13,7 +13,7 @@ import java.util.Objects;
 public class Product implements Comparable<Product>{
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     String name;
@@ -26,8 +26,7 @@ public class Product implements Comparable<Product>{
     @Column(name = "quantity_in_stock", nullable = false)
     int quantityInStock;
 
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
+    @ManyToOne(cascade = CascadeType.ALL)
     Category category;
 
     Product(){}

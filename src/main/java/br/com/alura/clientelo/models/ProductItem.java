@@ -9,20 +9,20 @@ import java.util.Objects;
 public class ProductItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false, cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    private Product product;
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    private Product product = new Product();
 
     @ManyToOne(optional = false)
-    private Order targetOrder;
+    private Order targetOrder = new Order();
 
     @Column(nullable = false)
     private int quantity;
 
-    @ManyToOne
-    private Discount discount;
+    @Embedded
+    private Discount discount = new Discount();
 
     ProductItem(){}
 

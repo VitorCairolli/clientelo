@@ -7,27 +7,13 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-@Entity
-@Table(name = "discount")
+@Embeddable
 public class Discount {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     @Enumerated(EnumType.STRING)
     DiscountType type;
 
-    @Column(name = "price", nullable = false)
     @JsonDeserialize(using = BigDecimal2JsonDeserializer.class)
     BigDecimal discount;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     Discount(){}
 
@@ -61,11 +47,11 @@ public class Discount {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Discount discount1 = (Discount) o;
-        return Objects.equals(id, discount1.id) && type == discount1.type && discount.equals(discount1.discount);
+        return type == discount1.type && discount.equals(discount1.discount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, discount);
+        return Objects.hash(type, discount);
     }
 }

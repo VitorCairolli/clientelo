@@ -1,22 +1,23 @@
 package br.com.alura.clientelo.vo;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.math.BigDecimal;
 
 public class MostSoldProductsVO {
 
-    private final long id;
+    private final Long id;
 
     private final String name;
 
     private final BigDecimal price;
 
-    private final long timesSold;
+    private final Long timesSold;
 
     private final int quantityInStock;
 
     private final String description;
 
-    public MostSoldProductsVO(long id, String name, BigDecimal price, long timeSold, int quantityInStock, String description) {
+    public MostSoldProductsVO(Long id, String name, BigDecimal price, Long timeSold, int quantityInStock, String description) {
         this.id = id;
         this.name = name;
         this.price = price;

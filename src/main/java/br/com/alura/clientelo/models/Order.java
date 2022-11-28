@@ -15,15 +15,14 @@ import java.util.Objects;
 @Table(name = "orders")
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column( nullable = false)
     @OneToMany(mappedBy = "targetOrder", cascade = CascadeType.ALL)
-    private List<ProductItem> productItems;
+    private List<ProductItem> productItems = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id")
     private Client client;
 
     @Column(name = "create_date", nullable = false)
@@ -42,7 +41,7 @@ public class Order {
         this.id = id;
     }
 
-    Order(){};
+    Order(){}
 
     public Order(List<ProductItem> productItems, Client client, LocalDate date) {
         this.productItems = productItems;
