@@ -2,7 +2,6 @@ package br.com.alura.clientelo.controllers;
 
 import br.com.alura.clientelo.dto.CategoryDTO;
 import br.com.alura.clientelo.dto.OutputAllCategoryDTO;
-import br.com.alura.clientelo.reports.output.Output;
 import br.com.alura.clientelo.service.CategoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,15 +19,15 @@ public class CategoryController {
 
     @GetMapping
     public ResponseEntity<OutputAllCategoryDTO> getCategories() {
-        var category = service.findAll();
+        var categories = service.findAll();
 
-        if (category.isEmpty())
+        if (categories.isEmpty())
             return ResponseEntity.notFound().build();
 
-        return ResponseEntity.ok(OutputAllCategoryDTO.from(category));
+        return ResponseEntity.ok(OutputAllCategoryDTO.from(categories));
     }
 
-    @GetMapping("/{probeId}")
+    @GetMapping("/{categoryId}")
     public ResponseEntity<CategoryDTO> getCategory(@PathVariable Long categoryId) {
         var category = service.findById(categoryId);
 
@@ -39,9 +38,9 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<CategoryDTO> createPlateau(@RequestBody CategoryDTO inputPlateauDTO) {
+    public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO inputCategoryDTO) {
 
-        var plateau = service.create(inputPlateauDTO.toEntity());
+        var plateau = service.create(inputCategoryDTO.toEntity());
 
         return ResponseEntity.ok(CategoryDTO.from(plateau));
     }
