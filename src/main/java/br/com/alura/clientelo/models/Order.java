@@ -18,7 +18,6 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column( nullable = false)
     @OneToMany(mappedBy = "targetOrder", cascade = CascadeType.ALL)
     private List<ProductItem> productItems = new ArrayList<>();
 

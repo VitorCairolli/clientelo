@@ -22,6 +22,10 @@ public class ProductItem {
     private int quantity;
 
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "discount", column = @Column(name = "discount_value")),
+            @AttributeOverride(name = "type", column = @Column(name = "discount_type"))
+    })
     private Discount discount = new Discount();
 
     ProductItem(){}

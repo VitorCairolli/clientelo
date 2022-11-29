@@ -54,7 +54,7 @@ public class ClienteloApplication implements CommandLineRunner {
         System.out.println("All clients: " + clientRepository.findAll());
         System.out.println("Clients order by expenses: " + clientRepository.findOrderedByMostExpended());
         System.out.println("All products: " + productRepository.findAll());
-        System.out.println("Products ordered by most sold: " + productRepository.findOrderedByMostSoldProducts());
+        System.out.println("Products ordered by most sold: " + productRepository.findOrderedMostSoldProducts());
         System.out.println("All orders: " + orderRepository.findAll());
         System.out.println("Orders by client: " + orderRepository.findByClient(orders.get(0).getClient()));
     }
