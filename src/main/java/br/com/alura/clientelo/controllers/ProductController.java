@@ -5,6 +5,9 @@ import br.com.alura.clientelo.dto.ProductDTO;
 import br.com.alura.clientelo.service.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/api/products")
@@ -37,10 +40,12 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO inputProductDTO) {
+    public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO inputProductDTO, UriComponentsBuilder uriBuilder) {
 
         var product = service.create(inputProductDTO.toEntity());
 
-        return ResponseEntity.ok(ProductDTO.from(product));
+        URI uri = uriBuilder.path("/products/{id}").buildAndExpand(product.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(ProductDTO.from(product));
     }
 }

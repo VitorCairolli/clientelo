@@ -5,6 +5,9 @@ import br.com.alura.clientelo.dto.OutputAllCategoryDTO;
 import br.com.alura.clientelo.service.CategoryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/api/categories")
@@ -38,10 +41,12 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO inputCategoryDTO) {
+    public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO inputCategoryDTO, UriComponentsBuilder uriBuilder) {
 
-        var plateau = service.create(inputCategoryDTO.toEntity());
+        var category = service.create(inputCategoryDTO.toEntity());
 
-        return ResponseEntity.ok(CategoryDTO.from(plateau));
+        URI uri = uriBuilder.path("/category/{id}").buildAndExpand(category.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(CategoryDTO.from(category));
     }
 }

@@ -8,6 +8,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -43,10 +46,12 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<OrderDTO> createOrder(@RequestBody OrderDTO inputOrderDTO) {
+    public ResponseEntity<OrderDTO> createOrder(@RequestBody OrderDTO inputOrderDTO, UriComponentsBuilder uriBuilder) {
 
         var order = service.create(inputOrderDTO.toEntity());
 
-        return ResponseEntity.ok(OrderDTO.from(order));
+        URI uri = uriBuilder.path("/orders/{id}").buildAndExpand(order.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(OrderDTO.from(order));
     }
 }
