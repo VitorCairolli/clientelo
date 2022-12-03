@@ -1,6 +1,5 @@
 package br.com.alura.clientelo.models;
 
-import br.com.alura.clientelo.converters.tools.BigDecimal2JsonDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import javax.persistence.*;
@@ -12,7 +11,6 @@ public class Discount {
     @Enumerated(EnumType.STRING)
     DiscountType type;
 
-    @JsonDeserialize(using = BigDecimal2JsonDeserializer.class)
     BigDecimal discount;
 
     Discount(){}

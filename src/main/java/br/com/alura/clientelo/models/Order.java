@@ -1,8 +1,6 @@
 package br.com.alura.clientelo.models;
 
-import br.com.alura.clientelo.converters.tools.BigDecimal2JsonDeserializer;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -29,7 +27,6 @@ public class Order {
     private LocalDate date;
 
     @Column(name = "total_price", nullable = false)
-    @JsonDeserialize(using = BigDecimal2JsonDeserializer.class)
     private BigDecimal totalPrice;
 
     public Long getId() {
