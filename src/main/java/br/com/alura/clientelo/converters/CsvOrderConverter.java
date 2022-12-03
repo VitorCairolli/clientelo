@@ -53,7 +53,7 @@ public class CsvOrderConverter {
                                 clientAddressComplement));
 
                 List<ProductItem> productItems = new ArrayList<>();
-                ProductItem productItem = new ProductItem(produto, null, quantidade, null);
+                ProductItem productItem = new ProductItem(produto, quantidade, null);
                 productItems.add(productItem);
                 Order pedido = new Order(productItems, client, data);
                 productItem.setOrder(pedido);

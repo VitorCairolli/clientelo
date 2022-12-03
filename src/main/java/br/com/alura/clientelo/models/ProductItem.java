@@ -30,9 +30,8 @@ public class ProductItem {
 
     ProductItem(){}
 
-    public ProductItem(Product product, Order order, int quantity, Discount discount) {
+    public ProductItem(Product product, int quantity, Discount discount) {
         this.product = product;
-        this.targetOrder = order;
         this.quantity = quantity;
         this.discount = discount;
     }

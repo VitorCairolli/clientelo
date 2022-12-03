@@ -20,7 +20,7 @@ import java.net.URISyntaxException;
 import java.util.*;
 
 @SpringBootApplication
-public class ClienteloApplication implements CommandLineRunner {
+public class ClienteloApplication{
     private final CategoryRepository categoryRepository;
     private final ClientRepository clientRepository;
     private final ProductRepository productRepository;
@@ -35,28 +35,6 @@ public class ClienteloApplication implements CommandLineRunner {
 
     public static void main(String[] args) throws IOException, URISyntaxException {
         SpringApplication.run(ClienteloApplication.class, args);
-    }
-
-    @Override
-    public void run(String... args) throws Exception {
-        List<Order> orders = CsvOrderConverter.convert("orders.csv");
-
-        OrderDao orderDao = new OrderDao();
-        orderDao.createAll(orders);
-
-        ReportController reportController = new ReportController();
-
-        reportController.logReport(new LoyalClientsReport());
-
-        reportController.logReport(new MostSoldProductsReport());
-
-        System.out.println("All categories: " + categoryRepository.findAll());
-        System.out.println("All clients: " + clientRepository.findAll());
-        System.out.println("Clients order by expenses: " + clientRepository.findOrderedByMostExpended());
-        System.out.println("All products: " + productRepository.findAll());
-        System.out.println("Products ordered by most sold: " + productRepository.findOrderedMostSoldProducts());
-        System.out.println("All orders: " + orderRepository.findAll());
-        System.out.println("Orders by client: " + orderRepository.findByClient(orders.get(0).getClient()));
     }
 }
 
