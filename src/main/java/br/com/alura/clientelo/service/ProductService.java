@@ -4,6 +4,8 @@ import br.com.alura.clientelo.models.Category;
 import br.com.alura.clientelo.models.Product;
 import br.com.alura.clientelo.repository.CategoryRepository;
 import br.com.alura.clientelo.repository.ProductRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +22,8 @@ public class ProductService {
         this.categoryRepository = categoryRepository;
     }
 
-    public List<Product> findAll(){
-        return productRepository.findAll();
+    public Page<Product> findAll(Pageable pageable){
+        return productRepository.findAll(pageable);
     }
 
     public Optional<Product> findById(Long id) {

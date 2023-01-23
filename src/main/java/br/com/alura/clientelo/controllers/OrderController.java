@@ -32,9 +32,12 @@ public class OrderController {
         return ResponseEntity.ok(OrderDTO.from(order.get()));
     }
 
-    @GetMapping("/page/{pageNumber}")
-    public ResponseEntity<Page<OrderDTO>> getOrders(@PathVariable int pageNumber) {
-        Pageable pageable = PageRequest.of(pageNumber, 20, Sort.by("date", "client").ascending());
+    @GetMapping
+    public ResponseEntity<Page<OrderDTO>> getOrders(@RequestParam int page,
+                                                    @RequestParam int size) {
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by("date", "client").ascending());
+
         var orderPage = service.findPage(pageable);
 
         if (orderPage.isEmpty())
