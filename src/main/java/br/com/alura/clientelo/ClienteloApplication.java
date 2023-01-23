@@ -6,11 +6,13 @@ import br.com.alura.clientelo.repository.OrderRepository;
 import br.com.alura.clientelo.repository.ProductRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
 @SpringBootApplication
+@EnableSpringDataWebSupport
 public class ClienteloApplication{
     private final CategoryRepository categoryRepository;
     private final ClientRepository clientRepository;

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -33,10 +34,8 @@ public class OrderController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<OrderDTO>> getOrders(@RequestParam int page,
-                                                    @RequestParam int size) {
-
-        Pageable pageable = PageRequest.of(page, size, Sort.by("date", "client").ascending());
+    public ResponseEntity<Page<OrderDTO>> getOrders(
+            @PageableDefault(sort = {"date", "client.name"}) Pageable pageable) {
 
         var orderPage = service.findPage(pageable);
 

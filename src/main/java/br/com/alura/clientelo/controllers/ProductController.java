@@ -22,9 +22,7 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ProductDTO>> getProducts(@RequestParam int page,
-                                            @RequestParam int size) {
-        Pageable pageable = PageRequest.of(page, size);
+    public ResponseEntity<Page<ProductDTO>> getProducts(Pageable pageable) {
 
         var productPage = service.findAll(pageable);
 

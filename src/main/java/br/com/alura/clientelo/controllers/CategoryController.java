@@ -5,6 +5,7 @@ import br.com.alura.clientelo.service.CategoryService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -23,9 +24,7 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<CategoryDTO>> getCategories(@RequestParam int page,
-                                                              @RequestParam int size) {
-        Pageable pageable = PageRequest.of(page, size);
+    public ResponseEntity<Page<CategoryDTO>> getCategories(Pageable pageable) {
 
         var categoriesPage = service.findAll(pageable);
 
