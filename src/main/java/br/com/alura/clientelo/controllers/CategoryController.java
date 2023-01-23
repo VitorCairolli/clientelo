@@ -1,8 +1,10 @@
 package br.com.alura.clientelo.controllers;
 
 import br.com.alura.clientelo.dto.CategoryDTO;
-import br.com.alura.clientelo.dto.OutputAllCategoryDTO;
 import br.com.alura.clientelo.service.CategoryService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -21,13 +23,18 @@ public class CategoryController {
     }
 
     @GetMapping
-    public ResponseEntity<OutputAllCategoryDTO> getCategories() {
-        var categories = service.findAll();
+    public ResponseEntity<Page<CategoryDTO>> getCategories(@RequestParam int page,
+                                                              @RequestParam int size) {
+        Pageable pageable = PageRequest.of(page, size);
 
-        if (categories.isEmpty())
+        var categoriesPage = service.findAll(pageable);
+
+        if (categoriesPage.isEmpty())
             return ResponseEntity.notFound().build();
 
-        return ResponseEntity.ok(OutputAllCategoryDTO.from(categories));
+        Page categoryDTOPage = categoriesPage.map(category -> CategoryDTO.from(category));
+
+        return ResponseEntity.ok(categoryDTOPage);
     }
 
     @GetMapping("/{categoryId}")

@@ -2,6 +2,8 @@ package br.com.alura.clientelo.service;
 
 import br.com.alura.clientelo.models.Category;
 import br.com.alura.clientelo.repository.CategoryRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +18,8 @@ public class CategoryService {
         this.repository = repository;
     }
 
-    public List<Category> findAll(){
-        return repository.findAll();
+    public Page<Category> findAll(Pageable pageable){
+        return repository.findAll(pageable);
     }
 
     public Optional<Category> findById(Long id) {
