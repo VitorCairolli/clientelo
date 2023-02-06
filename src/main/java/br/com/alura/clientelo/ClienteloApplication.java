@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 @SpringBootApplication
-@EnableSpringDataWebSupport
+//@EnableSpringDataWebSupport
 public class ClienteloApplication{
     private final CategoryRepository categoryRepository;
     private final ClientRepository clientRepository;

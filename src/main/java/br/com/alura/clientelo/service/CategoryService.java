@@ -27,6 +27,9 @@ public class CategoryService {
     }
 
     public Category create(Category newCategory){
+        Optional<Category> category = repository.findByName(newCategory.getName());
+        if(category.isPresent()) return category.get();
+
         return repository.save(newCategory);
     }
 }
